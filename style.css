@@ -5,7 +5,7 @@
   font-style: normal;
 }
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
@@ -14,7 +14,6 @@ body {
   padding: 0;
   font-family: 'LowresPixel', monospace;
   background-color: #000;
-  height: 200vh;
   -ms-overflow-style: none;
 }
 
@@ -38,8 +37,17 @@ body::-webkit-scrollbar {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: #fff;
   font-size: 1.5rem;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  image-rendering: pixelated;
 }
 
 .nav-links {
@@ -56,9 +64,17 @@ body::-webkit-scrollbar {
   font-size: 1rem;
   padding: 10px 25px;
   border: 2px solid #fff;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  image-rendering: pixelated;
 }
 
 section {
@@ -67,4 +83,5 @@ section {
   align-items: center;
   justify-content: center;
   color: #fff;
+  scroll-margin-top: 70px;
 }
