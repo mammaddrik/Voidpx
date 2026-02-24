@@ -8,15 +8,15 @@ a {
 }
 
 :root {
-  --bg-color: black;
-  --text-color: white;
-  --border-color: white;
+  --bg-color: #0b0f1a;
+  --text-color: #e6e6e6;
+  --border-color: #e6e6e6;
 }
 
 body.light {
-  --bg-color: white;
-  --text-color: black;
-  --border-color: black;
+  --bg-color: #e6e6e6;
+  --text-color: #0b0f1a;
+  --border-color: #0b0f1a;
 }
 
 * {
@@ -63,8 +63,40 @@ body {
   font-size: 2rem;
 }
 
+.search__box{
+  display: flex;
+}
+
+
+
+.search__box input {
+  font-family: "LowresPixel", monospace;
+  background: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
+  font-family: inherit;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    background 0.2s,
+    color 0.2s;
+}
+
+.search__button:active{
+  transform: scale(1.1);
+}
+
+input::placeholder {
+  color: var(--text-color);
+}
+
+input:focus{
+  outline: none;
+}
 .theme__toggle {
   background: transparent;
+  margin-left: 1rem;
   border: 2px solid var(--border-color);
   color: var(--text-color);
   font-family: inherit;
@@ -84,14 +116,14 @@ body {
   height: 80%;
 }
 
-.content__square {
+.content__box {
   display: flex;
   flex-wrap: wrap;
   margin-top: 5rem;
   justify-content: space-around;
   align-items: center;
 }
-.square {
+.box {
   width: 20vh;
   height: 25vh;
   margin: 0;
@@ -101,19 +133,15 @@ body {
   background-position: center;
 }
 
-.square img {
+.box img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* .square img{
-  width: 12%;
-  aspect-ratio: 1/1;
-} */
 
 @media (max-width: 400px) {
-  .square {
+  .box {
     flex: 1 1 80%;
   }
 }
