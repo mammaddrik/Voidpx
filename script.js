@@ -10,6 +10,18 @@ toggleBtn.addEventListener("click", () => {
   }
 });
 
+const hamburger = document.querySelector(".menu");
+const sideMenu = document.querySelector(".side__menu");
+const closeBtn = document.querySelector(".close__btn");
+
+hamburger.addEventListener("click", () => {
+  sideMenu.classList.add("active");
+});
+
+closeBtn.addEventListener("click", () => {
+  sideMenu.classList.remove("active");
+});
+
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const pageNumber = document.getElementById("pageNumber");
