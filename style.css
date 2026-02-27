@@ -57,29 +57,46 @@ body {
   height: 8%;
 }
 
-.menu{
+.menu {
   display: none;
   font-size: 2rem;
+  /* font-family: "LowresPixel"; */
   cursor: pointer;
-  color: white;
+  color: var(--text-color);
 }
 
-.side__menu{
+.side__menu {
   position: fixed;
+  align-items: center;
   top: 0;
   right: -100%;
-  width: 100%;
-  height: 8%;
-  background: #222;
-  color: white;
+  width: 60%;
+  height: 100vh;
+  background: var(--bg-color);
+  color: var(--text-color);
   padding: 1.5rem;
   transition: 0.3s ease;
 }
 
-.side__menu.active{
-  right: 0;
+.close__btn {
+  background: none;
+  border: none;
+  font-family: "LowresPixel";
+  font-size: 1.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
+.side__menu input {
+  width: 80%;
+  position: relative;
+  top: 4rem;
+}
+
+.side__menu.active {
+  right: 0;
+}
 
 .navbar__title {
   color: var(--text-color);
@@ -87,11 +104,9 @@ body {
   font-size: 2rem;
 }
 
-.search__box{
+.search__box {
   display: flex;
 }
-
-
 
 .search__box input {
   font-family: "LowresPixel", monospace;
@@ -107,7 +122,7 @@ body {
     color 0.2s;
 }
 
-.search__button:active{
+.search__button:active {
   transform: scale(1.1);
 }
 
@@ -115,7 +130,7 @@ input::placeholder {
   color: var(--text-color);
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 .theme__toggle {
@@ -136,11 +151,12 @@ input:focus{
   transform: scale(1.1);
 }
 
-@media (max-width:550px){
-  .theme__toggle, .search__box input{
+@media (max-width: 550px) {
+  .theme__toggle,
+  .search__box input {
     display: none;
   }
-  .menu{
+  .menu {
     display: block;
   }
 }
@@ -172,7 +188,6 @@ input:focus{
   object-fit: contain;
 }
 
-
 @media (max-width: 400px) {
   .box {
     flex: 1 1 80%;
@@ -183,7 +198,6 @@ input:focus{
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  position: relative;
   height: 15%;
 }
 
@@ -234,15 +248,12 @@ input:focus{
   margin: 0 1.3rem;
 }
 
-.footer__logo img {
-  height: 1.5rem;
-  margin: 0.5rem;
+.footer__logo i {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin: 0 0.5rem;
 }
 
-.light .footer__logo img {
-  filter: invert(1);
-}
-
-.footer__logo :active{
+.footer__logo :active {
   transform: scale(1.1);
 }
