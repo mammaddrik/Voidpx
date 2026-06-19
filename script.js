@@ -70,7 +70,7 @@ function calculateImagesPerPage() {
   const usableWidth = galleryWidth - paddingLeft - paddingRight;
   const usableHeight = galleryHeight - paddingTop - paddingBottom;
 
-  const minBoxSize = 230;
+  const minBoxSize = 180;
 
   if (usableWidth <= 0 || usableHeight <= 0) {
     return 1;
@@ -267,17 +267,18 @@ function handleSearch() {
 
 // ---------- Search Events ----------
 if (searchBtn) {
-  searchBtn.addEventListener("click", handleSearch);
-}
-
-if (searchForm) {
-  searchForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+  searchBtn.addEventListener("click", () => {
     handleSearch();
   });
 }
 
 if (searchInput) {
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  });
+
   searchInput.addEventListener("input", () => {
     if (searchInput.value.trim() === "") {
       currentFilteredImages = [...images];
