@@ -11,23 +11,6 @@ if (toggleBtn) {
   });
 }
 
-// ---------- Side Menu ----------
-const menu = document.querySelector(".menu");
-const sideMenu = document.querySelector(".side__menu");
-const closeBtn = document.querySelector(".close__btn");
-
-if (menu && sideMenu) {
-  menu.addEventListener("click", () => {
-    sideMenu.classList.add("active");
-  });
-}
-
-if (closeBtn && sideMenu) {
-  closeBtn.addEventListener("click", () => {
-    sideMenu.classList.remove("active");
-  });
-}
-
 // ---------- Elements ----------
 const gallery = document.querySelector(".content__box");
 
