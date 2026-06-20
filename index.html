@@ -17,17 +17,30 @@
     <main class="frame">
 
       <header class="navbar">
-        <h1 class="navbar__title">VOIDPX</h1>
 
-        <div class="search__box">
-          <form id="search">
-            <input type="text" placeholder="Search for Images..." />
-            <input class="search__button" type="button" value="Search" />
+        <div class="nav__left">
+          <h1 class="navbar__title">VOIDPX</h1>
+        </div>
+
+        <div class="nav__center">
+          <form id="search" class="search__box">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Search for Images..."
+            />
+            <button type="button" id="searchBtn" class="search__button">
+              Search
+            </button>
           </form>
+        </div>
+
+        <div class="nav__right">
           <button id="themeToggle" class="theme__toggle">DARK</button>
         </div>
 
       </header>
+
 
       <section class="content__collections">
         <div class="content__box">

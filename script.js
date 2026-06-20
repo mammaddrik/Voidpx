@@ -18,9 +18,10 @@ const pageNumber = document.getElementById("pageNumber");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 
+
 const searchForm = document.getElementById("search");
-const searchInput = document.querySelector("#search input");
-const searchBtn = document.querySelector(".search__button");
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
 
 // ---------- Gallery State ----------
 let images = [];
