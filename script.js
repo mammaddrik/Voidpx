@@ -38,57 +38,54 @@ function getNumberFromCSSValue(value) {
 function calculateImagesPerPage() {
   if (!gallery) return 1;
 
-  const galleryStyles = window.getComputedStyle(gallery);
-
   const galleryWidth = gallery.clientWidth;
   const galleryHeight = gallery.clientHeight;
 
+  // تشخیص حالت افقی بر اساس ارتفاع کم
+  const isLandscape = window.innerHeight < 480;
+
+  let minBoxSize;
+  if (isLandscape) {
+    minBoxSize = 140;
+  } else if (window.innerWidth <= 400) {
+    minBoxSize = 250;
+  } else {
+    minBoxSize = 180;
+  }
+
+  const galleryStyles = window.getComputedStyle(gallery);
   const paddingLeft = getNumberFromCSSValue(galleryStyles.paddingLeft);
   const paddingRight = getNumberFromCSSValue(galleryStyles.paddingRight);
   const paddingTop = getNumberFromCSSValue(galleryStyles.paddingTop);
   const paddingBottom = getNumberFromCSSValue(galleryStyles.paddingBottom);
-
   const columnGap = getNumberFromCSSValue(galleryStyles.columnGap);
   const rowGap = getNumberFromCSSValue(galleryStyles.rowGap);
 
   const usableWidth = galleryWidth - paddingLeft - paddingRight;
   const usableHeight = galleryHeight - paddingTop - paddingBottom;
 
-  const minBoxSize = 180;
+  if (usableWidth <= 0 || usableHeight <= 0) return 1;
 
-  if (usableWidth <= 0 || usableHeight <= 0) {
-    return 1;
-  }
+  const columns = Math.max(1, Math.floor((usableWidth + columnGap) / (minBoxSize + columnGap)));
+  const rows = Math.max(1, Math.floor((usableHeight + rowGap) / (minBoxSize + rowGap)));
 
-  const columns = Math.max(
-    1,
-    Math.floor((usableWidth + columnGap) / (minBoxSize + columnGap))
-  );
-
-  const boxSize = (usableWidth - columnGap * (columns - 1)) / columns;
-
-  const rows = Math.max(
-    1,
-    Math.floor((usableHeight + rowGap) / (boxSize + rowGap))
-  );
-
-  const count = columns * rows;
-
-  return Math.max(1, count);
+  return Math.max(1, columns * rows);
 }
 
+
 // ---------- Create Boxes ----------
-function createBoxes() {
+function createBoxes(count) {
   if (!gallery) return;
 
   gallery.innerHTML = "";
 
-  for (let i = 0; i < imagesPerPage; i++) {
+  for (let i = 0; i < count; i++) {
     const box = document.createElement("div");
     box.className = "box";
     gallery.appendChild(box);
   }
 }
+
 
 // ---------- Pagination Helpers ----------
 function getTotalPages() {
@@ -113,20 +110,17 @@ function showPage() {
 
   clampCurrentPage();
 
-  const boxes = gallery.querySelectorAll(".box");
-
   const startIndex = (currentPage - 1) * imagesPerPage;
   const endIndex = startIndex + imagesPerPage;
 
   const pageImages = currentFilteredImages.slice(startIndex, endIndex);
 
-  boxes.forEach((box) => {
-    box.innerHTML = "";
-  });
+  createBoxes(pageImages.length);
+
+  const boxes = gallery.querySelectorAll(".box");
 
   pageImages.forEach((src, index) => {
     const box = boxes[index];
-
     if (!box) return;
 
     const img = document.createElement("img");
@@ -140,6 +134,7 @@ function showPage() {
 
   updatePagination();
 }
+
 
 // ---------- Update Pagination UI ----------
 function updatePagination() {
@@ -277,10 +272,9 @@ function refreshGallery() {
   const newImagesPerPage = calculateImagesPerPage();
 
   imagesPerPage = newImagesPerPage;
-
-  createBoxes();
   showPage();
 }
+
 
 // ---------- Resize Handling ----------
 let resizeTimer;
@@ -296,13 +290,12 @@ window.addEventListener("resize", () => {
     const firstVisibleImageIndex = (currentPage - 1) * imagesPerPage;
 
     imagesPerPage = newImagesPerPage;
-
     currentPage = Math.floor(firstVisibleImageIndex / imagesPerPage) + 1;
 
-    createBoxes();
     showPage();
   }, 150);
 });
+
 
 // ---------- Initial Setup ----------
 window.addEventListener("load", () => {
