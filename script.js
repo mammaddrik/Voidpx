@@ -17,6 +17,7 @@ const gallery = document.querySelector(".content__box");
 const pageNumber = document.getElementById("pageNumber");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
+const imageCount = document.getElementById("imageCount");
 
 
 const searchForm = document.getElementById("search");
@@ -41,7 +42,6 @@ function calculateImagesPerPage() {
   const galleryWidth = gallery.clientWidth;
   const galleryHeight = gallery.clientHeight;
 
-  // تشخیص حالت افقی بر اساس ارتفاع کم
   const isLandscape = window.innerHeight < 480;
 
   let minBoxSize;
@@ -151,6 +151,11 @@ function updatePagination() {
   if (nextBtn) {
     nextBtn.disabled = currentPage >= totalPages;
   }
+
+  if (imageCount) {
+    imageCount.textContent = `(${currentFilteredImages.length} images)`;
+  }
+
 
   const pagination = document.querySelector(".pagination");
 
