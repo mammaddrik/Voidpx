@@ -1,15 +1,52 @@
 // ---------- Theme Toggle ----------
 const toggleBtn = document.getElementById("themeToggle");
+const toggleIcon = toggleBtn?.querySelector("i");
+const toggleLabel = toggleBtn?.querySelector("span");
+
+function updateThemeButton(isLight) {
+  if (toggleLabel) {
+    toggleLabel.textContent = isLight ? "LIGHT" : "DARK";
+  }
+
+  if (toggleIcon) {
+    toggleIcon.className = isLight
+      ? "bi bi-sun-fill"
+      : "bi bi-moon-stars-fill";
+  }
+}
+
+function applyTheme(theme) {
+  const isLight = theme === "light";
+  document.body.classList.toggle("light", isLight);
+  updateThemeButton(isLight);
+}
+
+function saveTheme(theme) {
+  localStorage.setItem("voidpx-theme", theme);
+}
+
+function loadTheme() {
+  const savedTheme = localStorage.getItem("voidpx-theme");
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme("dark");
+  }
+}
+
+loadTheme();
 
 if (toggleBtn) {
   toggleBtn.addEventListener("click", () => {
-    document.body.classList.toggle("light");
+    const isLight = !document.body.classList.contains("light");
+    const newTheme = isLight ? "light" : "dark";
 
-    toggleBtn.textContent = document.body.classList.contains("light")
-      ? "LIGHT"
-      : "DARK";
+    applyTheme(newTheme);
+    saveTheme(newTheme);
   });
 }
+
 
 // ---------- Elements ----------
 const gallery = document.querySelector(".content__box");

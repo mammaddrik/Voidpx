@@ -16,11 +16,9 @@
   <body>
     <main class="frame">
       <header class="navbar">
-
         <div class="nav__left">
           <h1 class="navbar__title">VOIDPX</h1>
         </div>
-
         <div class="nav__center">
           <form id="search" class="search__box">
             <input
@@ -29,12 +27,16 @@
               placeholder="Search for Images..."
             />
             <button type="button" id="searchBtn" class="search__button">
-              Search
+              <i class="bi bi-search"></i>
+              <span>Search</span>
             </button>
           </form>
         </div>
         <div class="nav__right">
-          <button id="themeToggle" class="theme__toggle">DARK</button>
+          <button id="themeToggle" class="theme__toggle">
+            <i class="bi bi-moon-stars-fill"></i>
+            <span>DARK</span>
+          </button>
         </div>
       </header>
 
@@ -43,16 +45,23 @@
         <p id="emptyState" class="empty-state is-hidden">No results found</p>
       </section>
 
-      <section class="pagination">
-        <button id="prevBtn" class="page__btn">PREV</button>
-        <span id="pageNumber">1 / 1</span>
-        <button id="nextBtn" class="page__btn">NEXT</button>
+      <section class="gallery-meta">
+        <div class="pagination">
+          <button id="prevBtn" class="page__btn">
+            <i class="bi bi-chevron-left"></i>
+            <span>PREV</span>
+          </button>
+          <span id="pageNumber">1 / 1</span>
+          <button id="nextBtn" class="page__btn">
+            <span>NEXT</span>
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+        <div class="gallery-info">
+          <span id="imageCount" class="image__count"></span>
+        </div>
       </section>
 
-      <div class="gallery-info">
-        <span id="imageCount" class="image__count"></span>
-      </div>
-      
       <footer class="footer">
         <div class="footer__logo">
           <a href="https://github.com/mammaddrik" target="_blank">

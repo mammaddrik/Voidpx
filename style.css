@@ -28,12 +28,15 @@ body {
   height: 100%;
   background: var(--bg-color);
   font-family: "LowresPixel", monospace;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -109,7 +112,18 @@ a {
   font-family: inherit;
   padding: 0.4rem 1rem;
   cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
 }
+
+.search__button i {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
 
 .search__button:active {
   transform: scale(1.1);
@@ -133,6 +147,16 @@ input:focus {
   font-family: inherit;
   padding: 0.3rem 0.6rem;
   cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.theme__toggle i {
+  font-size: 0.9rem;
+  line-height: 1;
 }
 
 .theme__toggle:active {
@@ -208,8 +232,8 @@ input:focus {
   justify-content: center;
   align-items: center;
   column-gap: 0.8rem;
+  row-gap: 0;
   color: var(--text-color);
-  user-select: none;
 }
 
 #prevBtn {
@@ -239,6 +263,16 @@ input:focus {
   transition:
     transform 0.15s ease,
     opacity 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  line-height: 1;
+}
+
+.page__btn i {
+  font-size: 0.85rem;
+  line-height: 1;
 }
 
 .page__btn:active:not(:disabled) {
@@ -252,13 +286,10 @@ input:focus {
 
 #pageNumber {
   min-width: 90px;
-
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
   padding: 0.45rem 0.6rem;
-
   text-align: center;
   font-size: 1rem;
   font-weight: bold;
