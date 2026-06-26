@@ -19,7 +19,7 @@ const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const imageCount = document.getElementById("imageCount");
 
-
+const emptyState = document.getElementById("emptyState");
 const searchForm = document.getElementById("search");
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -110,6 +110,12 @@ function showPage() {
 
   clampCurrentPage();
 
+  if (currentFilteredImages.length === 0) {
+    gallery.innerHTML = "";
+    updatePagination();
+    return;
+  }
+
   const startIndex = (currentPage - 1) * imagesPerPage;
   const endIndex = startIndex + imagesPerPage;
 
@@ -156,6 +162,9 @@ function updatePagination() {
     imageCount.textContent = `(${currentFilteredImages.length} images)`;
   }
 
+  if (emptyState) {
+  emptyState.classList.toggle("is-hidden", currentFilteredImages.length !== 0);
+  }
 
   const pagination = document.querySelector(".pagination");
 

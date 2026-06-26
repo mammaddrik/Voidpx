@@ -150,6 +150,25 @@ input:focus {
 
 /* ------------------ Gallery Area ------------------ */
 
+.empty-state {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--text-color);
+  font-size: 1rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.content__collections {
+  position: relative;
+}
+
+.empty-state.is-hidden {
+  display: none;
+}
+
 .content__collections {
   flex: 1;
   min-height: 0;
