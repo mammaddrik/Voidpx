@@ -47,7 +47,6 @@ if (toggleBtn) {
   });
 }
 
-
 // ---------- Elements ----------
 const gallery = document.querySelector(".content__box");
 
@@ -61,13 +60,58 @@ const searchForm = document.getElementById("search");
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 
+// ---------- Search Helpers ----------
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .replaceAll("_", "")
+    .replaceAll("-", "")
+    .replaceAll(" ", "");
+}
+
+function getImageName(src) {
+  return src.split("/").pop() || "";
+}
+
+// ---------- URL State ----------
+function loadStateFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+
+  const page = Number.parseInt(params.get("page"), 10);
+  const query = params.get("q") || "";
+
+  return {
+    page: Number.isNaN(page) || page < 1 ? 1 : page,
+    query: query.trim(),
+  };
+}
+
+function saveStateToUrl({ page, query }) {
+  const url = new URL(window.location.href);
+
+  if (page <= 1) {
+    url.searchParams.delete("page");
+  } else {
+    url.searchParams.set("page", String(page));
+  }
+
+  if (!query || query.trim() === "") {
+    url.searchParams.delete("q");
+  } else {
+    url.searchParams.set("q", query.trim());
+  }
+
+  window.history.replaceState({}, "", url);
+}
+
+const initialUrlState = loadStateFromUrl();
+
 // ---------- Gallery State ----------
 let images = [];
 let currentFilteredImages = [];
-let currentPage = 1;
+let currentPage = initialUrlState.page;
 let imagesPerPage = 1;
-let lastAppliedQuery = "";
-
+let lastAppliedQuery = normalize(initialUrlState.query);
 
 // ---------- Responsive Images Per Page ----------
 function getNumberFromCSSValue(value) {
@@ -108,6 +152,7 @@ function calculateImagesPerPage() {
     1,
     Math.floor((usableWidth + columnGap) / (minBoxSize + columnGap))
   );
+
   const rows = Math.max(
     1,
     Math.floor((usableHeight + rowGap) / (minBoxSize + rowGap))
@@ -115,7 +160,6 @@ function calculateImagesPerPage() {
 
   return Math.max(1, columns * rows);
 }
-
 
 // ---------- Create Boxes ----------
 function createBoxes(count) {
@@ -130,10 +174,37 @@ function createBoxes(count) {
   }
 }
 
+// ---------- Filter Images ----------
+function filterImages(query) {
+  const normalizedQuery = normalize(query);
+
+  if (normalizedQuery === "") {
+    currentFilteredImages = [...images];
+    return;
+  }
+
+  currentFilteredImages = images.filter((img) => {
+    const fileName = getImageName(img);
+    const normalizedFileName = normalize(fileName);
+
+    return normalizedFileName.includes(normalizedQuery);
+  });
+}
 
 // ---------- Pagination Helpers ----------
 function getTotalPages() {
   return Math.max(1, Math.ceil(currentFilteredImages.length / imagesPerPage));
+}
+
+function getCurrentQuery() {
+  return searchInput?.value.trim() || "";
+}
+
+function syncUrlState() {
+  saveStateToUrl({
+    page: currentPage,
+    query: getCurrentQuery(),
+  });
 }
 
 function clampCurrentPage() {
@@ -146,6 +217,8 @@ function clampCurrentPage() {
   if (currentPage < 1) {
     currentPage = 1;
   }
+
+  syncUrlState();
 }
 
 // ---------- Show Page ----------
@@ -162,7 +235,6 @@ function showPage() {
 
   const startIndex = (currentPage - 1) * imagesPerPage;
   const endIndex = startIndex + imagesPerPage;
-
   const pageImages = currentFilteredImages.slice(startIndex, endIndex);
 
   createBoxes(pageImages.length);
@@ -186,7 +258,6 @@ function showPage() {
 
   updatePagination();
 }
-
 
 // ---------- Update Pagination UI ----------
 function updatePagination() {
@@ -223,13 +294,13 @@ function updatePagination() {
   }
 }
 
-
 // ---------- Pagination Events ----------
 if (prevBtn) {
   prevBtn.addEventListener("click", () => {
     if (currentPage <= 1) return;
 
     currentPage--;
+    syncUrlState();
     showPage();
   });
 }
@@ -241,6 +312,7 @@ if (nextBtn) {
     if (currentPage >= totalPages) return;
 
     currentPage++;
+    syncUrlState();
     showPage();
   });
 }
@@ -256,8 +328,13 @@ fetch("./assets/image/images.json")
   })
   .then((data) => {
     images = data.map((name) => `assets/image/${name}`);
-    currentFilteredImages = [...images];
-    lastAppliedQuery = "";
+
+    if (searchInput) {
+      searchInput.value = initialUrlState.query;
+    }
+
+    filterImages(initialUrlState.query);
+    lastAppliedQuery = normalize(initialUrlState.query);
 
     refreshGallery();
   })
@@ -265,35 +342,7 @@ fetch("./assets/image/images.json")
     console.error("Failed to load images.json:", err);
   });
 
-// ---------- Search Helpers ----------
-function normalize(text) {
-  return text
-    .toLowerCase()
-    .replaceAll("_", "")
-    .replaceAll("-", "")
-    .replaceAll(" ", "");
-}
-
-function getImageName(src) {
-  return src.split("/").pop() || "";
-}
-
-function filterImages(query) {
-  const normalizedQuery = normalize(query);
-
-  if (normalizedQuery === "") {
-    currentFilteredImages = [...images];
-    return;
-  }
-
-  currentFilteredImages = images.filter((img) => {
-    const fileName = getImageName(img);
-    const normalizedFileName = normalize(fileName);
-
-    return normalizedFileName.includes(normalizedQuery);
-  });
-}
-
+// ---------- Search ----------
 function handleSearch() {
   if (!searchInput) return;
 
@@ -307,11 +356,18 @@ function handleSearch() {
   filterImages(query);
   currentPage = 1;
   lastAppliedQuery = normalizedQuery;
+  syncUrlState();
   refreshGallery();
 }
 
-
 // ---------- Search Events ----------
+if (searchForm) {
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    handleSearch();
+  });
+}
+
 if (searchBtn) {
   searchBtn.addEventListener("click", () => {
     handleSearch();
@@ -322,6 +378,7 @@ if (searchInput) {
   searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
+      handleSearch();
     }
   });
 
@@ -339,6 +396,7 @@ if (searchInput) {
     currentFilteredImages = [...images];
     currentPage = 1;
     lastAppliedQuery = "";
+    syncUrlState();
     refreshGallery();
   });
 }
@@ -346,11 +404,9 @@ if (searchInput) {
 // ---------- Refresh Gallery ----------
 function refreshGallery() {
   const newImagesPerPage = calculateImagesPerPage();
-
   imagesPerPage = newImagesPerPage;
   showPage();
 }
-
 
 // ---------- Resize Handling ----------
 let resizeTimer;
@@ -367,13 +423,8 @@ window.addEventListener("resize", () => {
 
     imagesPerPage = newImagesPerPage;
     currentPage = Math.floor(firstVisibleImageIndex / imagesPerPage) + 1;
+    syncUrlState();
 
     showPage();
   }, 150);
-});
-
-
-// ---------- Initial Setup ----------
-window.addEventListener("load", () => {
-  refreshGallery();
 });
