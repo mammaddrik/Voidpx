@@ -211,7 +211,20 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: boxFadeIn 0.4s ease forwards;
+}
+
+@keyframes boxFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .box img {

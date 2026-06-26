@@ -166,6 +166,8 @@ function showPage() {
     const box = boxes[index];
     if (!box) return;
 
+    box.style.animationDelay = `${index * 70}ms`;
+
     const img = document.createElement("img");
     img.src = src;
     img.alt = getImageName(src);
@@ -288,12 +290,18 @@ function handleSearch() {
   if (!searchInput) return;
 
   const query = searchInput.value.trim();
+  const normalizedQuery = normalize(query);
+  const isAlreadyShowingAllImages = currentFilteredImages.length === images.length;
+
+  if (normalizedQuery === "" && isAlreadyShowingAllImages) {
+    return;
+  }
 
   filterImages(query);
-
   currentPage = 1;
   refreshGallery();
 }
+
 
 // ---------- Search Events ----------
 if (searchBtn) {
