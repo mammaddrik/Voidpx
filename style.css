@@ -186,16 +186,13 @@ input:focus {
   padding: 0.3rem 0.6rem;
   cursor: pointer;
   line-height: 1;
-
-  width: 100px;
-  min-width: 100px;
+  width: 125px;
+  min-width: 125px;
   height: 34px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-
   white-space: nowrap;
   overflow: hidden;
   flex-shrink: 0;
