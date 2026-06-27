@@ -102,7 +102,16 @@ a {
   border-right: none;
   color: var(--text-color);
   font-family: inherit;
+  font-size: 16px;
   padding: 0.4rem 0.7rem;
+}
+
+.search__box input::placeholder {
+  color: var(--text-color);
+}
+
+.search__box input:focus {
+  outline: none;
 }
 
 .search__button {
@@ -124,17 +133,8 @@ a {
   line-height: 1;
 }
 
-
 .search__button:active {
   transform: scale(1.1);
-}
-
-input::placeholder {
-  color: var(--text-color);
-}
-
-input:focus {
-  outline: none;
 }
 
 /* ------------------ Theme Button ------------------ */
@@ -165,6 +165,13 @@ input:focus {
 
 /* ------------------ Gallery Area ------------------ */
 
+.content__collections {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .empty-state {
   position: absolute;
   inset: 0;
@@ -176,18 +183,8 @@ input:focus {
   pointer-events: none;
 }
 
-.content__collections {
-  position: relative;
-}
-
 .empty-state.is-hidden {
   display: none;
-}
-
-.content__collections {
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
 }
 
 .content__box {
@@ -276,8 +273,12 @@ input:focus {
   text-overflow: ellipsis;
 }
 
+/* ------------------ Gallery Bottom Panel ------------------ */
 
-/* ------------------ Pagination ------------------ */
+.gallery-panel {
+  display: flex;
+  flex-direction: column;
+}
 
 .pagination {
   min-height: 50px;
@@ -288,6 +289,10 @@ input:focus {
   column-gap: 0.8rem;
   row-gap: 0;
   color: var(--text-color);
+}
+
+.pagination.is-hidden {
+  display: none;
 }
 
 #prevBtn {
@@ -314,9 +319,7 @@ input:focus {
   font-size: 0.9rem;
   padding: 0.45rem 0.8rem;
   cursor: pointer;
-  transition:
-    transform 0.15s ease,
-    opacity 0.15s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -348,11 +351,6 @@ input:focus {
   font-size: 1rem;
   font-weight: bold;
   color: var(--text-color);
-}
-
-.pagination.is-hidden {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .gallery-info {
@@ -425,7 +423,7 @@ input:focus {
   transform: scale(1.1);
 }
 
-/* ------------------ Mobile Gallery Layout ------------------ */
+/* ------------------ Mobile Layout ------------------ */
 
 @media (max-width: 700px) {
   .footer {
@@ -520,12 +518,12 @@ input:focus {
     gap: 15px;
     padding: 10px;
   }
+
   .box {
     width: 180px;
     height: 180px;
   }
 }
-
 
 /* ------------------ Landscape Mode ------------------ */
 
@@ -629,4 +627,3 @@ input:focus {
     gap: 0.8rem;
   }
 }
-

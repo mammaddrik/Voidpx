@@ -51,6 +51,7 @@ if (toggleBtn) {
 
 // ---------- Elements ----------
 const gallery = document.querySelector(".content__box");
+const pagination = document.querySelector(".pagination");
 
 const pageNumber = document.getElementById("pageNumber");
 const prevBtn = document.getElementById("prevBtn");
@@ -161,8 +162,6 @@ function calculateImagesPerPage() {
   return Math.max(1, columns * rows);
 }
 
-
-
 // ---------- Filter Images ----------
 function filterImages(query) {
   const normalizedQuery = normalize(query);
@@ -173,15 +172,8 @@ function filterImages(query) {
   }
 
   currentFilteredImages = images.filter((image) => {
-    const normalizedFile = normalize(image.file);
     const normalizedTitle = normalize(image.title);
-    const normalizedCategory = normalize(image.category);
-
-    return (
-      normalizedFile.includes(normalizedQuery) ||
-      normalizedTitle.includes(normalizedQuery) ||
-      normalizedCategory.includes(normalizedQuery)
-    );
+    return normalizedTitle.includes(normalizedQuery);
   });
 }
 
@@ -215,7 +207,6 @@ function clampCurrentPage() {
   syncUrlState();
 }
 
-
 // ---------- Show Page ----------
 function showPage() {
   if (!gallery) return;
@@ -241,7 +232,6 @@ function showPage() {
     box.className = "box";
     box.style.animationDelay = `${index * 70}ms`;
 
-    /* Image wrapper */
     const imageWrapper = document.createElement("div");
     imageWrapper.className = "gallery-card__image";
 
@@ -253,7 +243,6 @@ function showPage() {
 
     imageWrapper.appendChild(img);
 
-    /* Meta section */
     const meta = document.createElement("div");
     meta.className = "gallery-card__meta";
 
@@ -329,6 +318,64 @@ if (nextBtn) {
   });
 }
 
+// ---------- Search ----------
+function handleSearch() {
+  if (!searchInput) return;
+
+  const query = searchInput.value.trim();
+  const normalizedQuery = normalize(query);
+
+  if (normalizedQuery === lastAppliedQuery) {
+    return;
+  }
+
+  filterImages(query);
+  currentPage = 1;
+  lastAppliedQuery = normalizedQuery;
+  syncUrlState();
+  refreshGallery();
+}
+
+if (searchForm) {
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+}
+
+if (searchBtn) {
+  searchBtn.addEventListener("click", () => {
+    handleSearch();
+  });
+}
+
+if (searchInput) {
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  });
+
+  searchInput.addEventListener("input", () => {
+    const normalizedQuery = normalize(searchInput.value.trim());
+
+    if (normalizedQuery !== "") return;
+    if (lastAppliedQuery === "") return;
+
+    currentFilteredImages = [...images];
+    currentPage = 1;
+    lastAppliedQuery = "";
+    syncUrlState();
+    refreshGallery();
+  });
+}
+
+// ---------- Refresh Gallery ----------
+function refreshGallery() {
+  const newImagesPerPage = calculateImagesPerPage();
+  imagesPerPage = newImagesPerPage;
+  showPage();
+}
+
 // ---------- Load Images From JSON ----------
 fetch("./assets/image/images.json")
   .then((res) => {
@@ -358,70 +405,6 @@ fetch("./assets/image/images.json")
   .catch((err) => {
     console.error("Failed to load images.json:", err);
   });
-
-// ---------- Search ----------
-function handleSearch() {
-  if (!searchInput) return;
-
-  const query = searchInput.value.trim();
-  const normalizedQuery = normalize(query);
-
-  if (normalizedQuery === lastAppliedQuery) {
-    return;
-  }
-
-  filterImages(query);
-  currentPage = 1;
-  lastAppliedQuery = normalizedQuery;
-  syncUrlState();
-  refreshGallery();
-}
-
-// ---------- Search Events ----------
-if (searchForm) {
-  searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-  });
-}
-
-if (searchBtn) {
-  searchBtn.addEventListener("click", () => {
-    handleSearch();
-  });
-}
-
-if (searchInput) {
-  searchInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
-  });
-
-  searchInput.addEventListener("input", () => {
-    const normalizedQuery = normalize(searchInput.value.trim());
-
-    if (normalizedQuery !== "") {
-      return;
-    }
-
-    if (lastAppliedQuery === "") {
-      return;
-    }
-
-    currentFilteredImages = [...images];
-    currentPage = 1;
-    lastAppliedQuery = "";
-    syncUrlState();
-    refreshGallery();
-  });
-}
-
-// ---------- Refresh Gallery ----------
-function refreshGallery() {
-  const newImagesPerPage = calculateImagesPerPage();
-  imagesPerPage = newImagesPerPage;
-  showPage();
-}
 
 // ---------- Resize Handling ----------
 let resizeTimer;
