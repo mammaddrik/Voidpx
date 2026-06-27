@@ -130,16 +130,10 @@ function calculateImagesPerPage() {
   const galleryWidth = gallery.clientWidth;
   const galleryHeight = gallery.clientHeight;
 
-  const isLandscape = window.innerHeight < 480;
+  const isLandscape =
+    window.matchMedia("(max-height: 480px) and (orientation: landscape)").matches;
 
-  let minBoxSize;
-  if (isLandscape) {
-    minBoxSize = 140;
-  } else if (window.innerWidth <= 400) {
-    minBoxSize = 250;
-  } else {
-    minBoxSize = 180;
-  }
+  const minBoxSize = isLandscape ? 140 : 180;
 
   const galleryStyles = window.getComputedStyle(gallery);
   const paddingLeft = getNumberFromCSSValue(galleryStyles.paddingLeft);
@@ -167,18 +161,7 @@ function calculateImagesPerPage() {
   return Math.max(1, columns * rows);
 }
 
-// ---------- Create Boxes ----------
-function createBoxes(count) {
-  if (!gallery) return;
 
-  gallery.innerHTML = "";
-
-  for (let i = 0; i < count; i++) {
-    const box = document.createElement("div");
-    box.className = "box";
-    gallery.appendChild(box);
-  }
-}
 
 // ---------- Filter Images ----------
 function filterImages(query) {
@@ -219,8 +202,6 @@ function syncUrlState() {
 }
 
 function clampCurrentPage() {
-  if (images.length === 0) return;
-
   const totalPages = getTotalPages();
 
   if (currentPage > totalPages) {
@@ -234,84 +215,94 @@ function clampCurrentPage() {
   syncUrlState();
 }
 
+
 // ---------- Show Page ----------
 function showPage() {
   if (!gallery) return;
 
   clampCurrentPage();
+  gallery.innerHTML = "";
 
   if (currentFilteredImages.length === 0) {
-    gallery.innerHTML = "";
     updatePagination();
     return;
   }
 
   const startIndex = (currentPage - 1) * imagesPerPage;
-  const endIndex = startIndex + imagesPerPage;
-  const pageImages = currentFilteredImages.slice(startIndex, endIndex);
+  const pageImages = currentFilteredImages.slice(
+    startIndex,
+    startIndex + imagesPerPage
+  );
 
-  createBoxes(pageImages.length);
-
-  const boxes = gallery.querySelectorAll(".box");
+  const fragment = document.createDocumentFragment();
 
   pageImages.forEach((image, index) => {
-    const box = boxes[index];
-    if (!box) return;
-
+    const box = document.createElement("div");
+    box.className = "box";
     box.style.animationDelay = `${index * 70}ms`;
+
+    /* Image wrapper */
+    const imageWrapper = document.createElement("div");
+    imageWrapper.className = "gallery-card__image";
 
     const img = document.createElement("img");
     img.src = image.src;
-    img.alt = image.title || image.file;
+    img.alt = image.title || getImageName(image);
     img.loading = "lazy";
     img.decoding = "async";
 
+    imageWrapper.appendChild(img);
+
+    /* Meta section */
     const meta = document.createElement("div");
-    meta.className = "gallery-meta";
+    meta.className = "gallery-card__meta";
 
     const title = document.createElement("h3");
-    title.className = "gallery-title";
+    title.className = "gallery-card__title";
     title.textContent = image.title || getImageName(image);
 
     const category = document.createElement("span");
-    category.className = "gallery-category";
+    category.className = "gallery-card__category";
     category.textContent = image.category || "Uncategorized";
 
     meta.append(title, category);
-    box.append(img, meta);
+    box.append(imageWrapper, meta);
+    fragment.appendChild(box);
   });
 
+  gallery.appendChild(fragment);
   updatePagination();
 }
 
 // ---------- Update Pagination UI ----------
 function updatePagination() {
-  const totalPages = getTotalPages();
+  const isEmpty = currentFilteredImages.length === 0;
+  const totalPages = isEmpty ? 1 : getTotalPages();
 
   if (pageNumber) {
     pageNumber.textContent = `${currentPage} / ${totalPages}`;
   }
 
   if (prevBtn) {
-    prevBtn.disabled = currentPage <= 1;
+    prevBtn.disabled = isEmpty || currentPage <= 1;
   }
 
   if (nextBtn) {
-    nextBtn.disabled = currentPage >= totalPages;
+    nextBtn.disabled = isEmpty || currentPage >= totalPages;
   }
 
   if (imageCount) {
-    imageCount.textContent = `(${currentFilteredImages.length} images)`;
+    const count = currentFilteredImages.length;
+    imageCount.textContent = `${count} image${count === 1 ? "" : "s"}`;
   }
 
   if (emptyState) {
-    emptyState.classList.toggle("is-hidden", currentFilteredImages.length !== 0);
+    emptyState.classList.toggle("is-hidden", !isEmpty);
   }
 
   const pagination = document.querySelector(".pagination");
-
   if (pagination) {
-    pagination.classList.toggle("is-hidden", totalPages <= 1);
+    pagination.classList.toggle("is-hidden", isEmpty || totalPages <= 1);
   }
 }
 
