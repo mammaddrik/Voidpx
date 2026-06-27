@@ -33,6 +33,8 @@ function loadTheme() {
   } else {
     applyTheme("dark");
   }
+
+  document.body.classList.add("theme-ready");
 }
 
 loadTheme();
@@ -61,16 +63,20 @@ const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 
 // ---------- Search Helpers ----------
-function normalize(text) {
-  return text
+function normalize(text = "") {
+  return String(text)
     .toLowerCase()
     .replaceAll("_", "")
     .replaceAll("-", "")
     .replaceAll(" ", "");
 }
 
-function getImageName(src) {
-  return src.split("/").pop() || "";
+function getImageName(image) {
+  if (typeof image === "string") {
+    return image.split("/").pop() || "";
+  }
+
+  return image?.file || "";
 }
 
 // ---------- URL State ----------
@@ -183,11 +189,16 @@ function filterImages(query) {
     return;
   }
 
-  currentFilteredImages = images.filter((img) => {
-    const fileName = getImageName(img);
-    const normalizedFileName = normalize(fileName);
+  currentFilteredImages = images.filter((image) => {
+    const normalizedFile = normalize(image.file);
+    const normalizedTitle = normalize(image.title);
+    const normalizedCategory = normalize(image.category);
 
-    return normalizedFileName.includes(normalizedQuery);
+    return (
+      normalizedFile.includes(normalizedQuery) ||
+      normalizedTitle.includes(normalizedQuery) ||
+      normalizedCategory.includes(normalizedQuery)
+    );
   });
 }
 
@@ -208,6 +219,8 @@ function syncUrlState() {
 }
 
 function clampCurrentPage() {
+  if (images.length === 0) return;
+
   const totalPages = getTotalPages();
 
   if (currentPage > totalPages) {
@@ -241,19 +254,31 @@ function showPage() {
 
   const boxes = gallery.querySelectorAll(".box");
 
-  pageImages.forEach((src, index) => {
+  pageImages.forEach((image, index) => {
     const box = boxes[index];
     if (!box) return;
 
     box.style.animationDelay = `${index * 70}ms`;
 
     const img = document.createElement("img");
-    img.src = src;
-    img.alt = getImageName(src);
+    img.src = image.src;
+    img.alt = image.title || image.file;
     img.loading = "lazy";
     img.decoding = "async";
 
-    box.appendChild(img);
+    const meta = document.createElement("div");
+    meta.className = "gallery-meta";
+
+    const title = document.createElement("h3");
+    title.className = "gallery-title";
+    title.textContent = image.title || getImageName(image);
+
+    const category = document.createElement("span");
+    category.className = "gallery-category";
+    category.textContent = image.category || "Uncategorized";
+
+    meta.append(title, category);
+    box.append(img, meta);
   });
 
   updatePagination();
@@ -286,11 +311,7 @@ function updatePagination() {
   const pagination = document.querySelector(".pagination");
 
   if (pagination) {
-    if (totalPages <= 1) {
-      pagination.classList.add("is-hidden");
-    } else {
-      pagination.classList.remove("is-hidden");
-    }
+    pagination.classList.toggle("is-hidden", totalPages <= 1);
   }
 }
 
@@ -327,7 +348,12 @@ fetch("./assets/image/images.json")
     return res.json();
   })
   .then((data) => {
-    images = data.map((name) => `assets/image/${name}`);
+    images = data.map((item) => ({
+      file: item.file,
+      src: `assets/image/${item.file}`,
+      title: item.title,
+      category: item.category,
+    }));
 
     if (searchInput) {
       searchInput.value = initialUrlState.query;
@@ -364,7 +390,6 @@ function handleSearch() {
 if (searchForm) {
   searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    handleSearch();
   });
 }
 
@@ -378,7 +403,6 @@ if (searchInput) {
   searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      handleSearch();
     }
   });
 

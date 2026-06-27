@@ -1,44 +1,212 @@
 [
-    "Alien.png",
-    "Arcade.png",
-    "Band_Aids.png",
-    "Blue_Ring.png",
-    "Cactus.png",
-    "Cat.png",
-    "Cats_Paw.png",
-    "Chair.png",
-    "Cheese.png",
-    "Coin.png",
-    "Cow.png",
-    "Crown.png",
-    "Dog.png",
-    "Donut.png",
-    "Feather.png",
-    "Fire.png",
-    "Flower.png",
-    "Four_Leaved_Clover.png",
-    "Health_Bar.png",
-    "HollowKnight_TheKnight.png",
-    "Ice_Cream.png",
-    "Koala.png",
-    "Magic_Ball.png",
-    "Moon_Ball.png",
-    "Mouse.png",
-    "Nail_Polish.png",
-    "Octopus.png",
-    "Orange.png",
-    "Paint_Brush.png",
-    "Pepper.png",
-    "Plant.png",
-    "Poison.png",
-    "Poop.png",
-    "Rainbow_Cloud.png",
-    "Rainbow_Poop.png",
-    "Red_Ring.png",
-    "Sand_Clock.png",
-    "Steak.png",
-    "Strawberry_Band_Aids.png",
-    "Pinwheel.png",
-    "Tree.png",
-    "Wi-Fi.png"
+  {
+    "file": "Alien.png",
+    "title": "Alien",
+    "category": "Characters"
+  },
+  {
+    "file": "Arcade.png",
+    "title": "Arcade Machine",
+    "category": "Objects"
+  },
+  {
+    "file": "Band_Aids.png",
+    "title": "Band Aids",
+    "category": "Items"
+  },
+  {
+    "file": "Blue_Ring.png",
+    "title": "Blue Ring",
+    "category": "Items"
+  },
+  {
+    "file": "Cactus.png",
+    "title": "Cactus",
+    "category": "Nature"
+  },
+  {
+    "file": "Cat.png",
+    "title": "Cat",
+    "category": "Animals"
+  },
+  {
+    "file": "Cats_Paw.png",
+    "title": "Cat Paw",
+    "category": "Animals"
+  },
+  {
+    "file": "Chair.png",
+    "title": "Chair",
+    "category": "Objects"
+  },
+  {
+    "file": "Cheese.png",
+    "title": "Cheese",
+    "category": "Food"
+  },
+  {
+    "file": "Coin.png",
+    "title": "Coin",
+    "category": "Items"
+  },
+  {
+    "file": "Cow.png",
+    "title": "Cow",
+    "category": "Animals"
+  },
+  {
+    "file": "Crown.png",
+    "title": "Crown",
+    "category": "Items"
+  },
+  {
+    "file": "Dog.png",
+    "title": "Dog",
+    "category": "Animals"
+  },
+  {
+    "file": "Donut.png",
+    "title": "Donut",
+    "category": "Food"
+  },
+  {
+    "file": "Feather.png",
+    "title": "Feather",
+    "category": "Nature"
+  },
+  {
+    "file": "Fire.png",
+    "title": "Fire",
+    "category": "Effects"
+  },
+  {
+    "file": "Flower.png",
+    "title": "Flower",
+    "category": "Nature"
+  },
+  {
+    "file": "Four_Leaved_Clover.png",
+    "title": "Four Leaf Clover",
+    "category": "Nature"
+  },
+  {
+    "file": "Health_Bar.png",
+    "title": "Health Bar",
+    "category": "UI"
+  },
+  {
+    "file": "HollowKnight_TheKnight.png",
+    "title": "The Knight",
+    "category": "Characters"
+  },
+  {
+    "file": "Ice_Cream.png",
+    "title": "Ice Cream",
+    "category": "Food"
+  },
+  {
+    "file": "Koala.png",
+    "title": "Koala",
+    "category": "Animals"
+  },
+  {
+    "file": "Magic_Ball.png",
+    "title": "Magic Ball",
+    "category": "Items"
+  },
+  {
+    "file": "Moon_Ball.png",
+    "title": "Moon Ball",
+    "category": "Items"
+  },
+  {
+    "file": "Mouse.png",
+    "title": "Mouse",
+    "category": "Animals"
+  },
+  {
+    "file": "Nail_Polish.png",
+    "title": "Nail Polish",
+    "category": "Objects"
+  },
+  {
+    "file": "Octopus.png",
+    "title": "Octopus",
+    "category": "Animals"
+  },
+  {
+    "file": "Orange.png",
+    "title": "Orange",
+    "category": "Food"
+  },
+  {
+    "file": "Paint_Brush.png",
+    "title": "Paint Brush",
+    "category": "Tools"
+  },
+  {
+    "file": "Pepper.png",
+    "title": "Pepper",
+    "category": "Food"
+  },
+  {
+    "file": "Plant.png",
+    "title": "Plant",
+    "category": "Nature"
+  },
+  {
+    "file": "Poison.png",
+    "title": "Poison",
+    "category": "Items"
+  },
+  {
+    "file": "Poop.png",
+    "title": "Poop",
+    "category": "Fun"
+  },
+  {
+    "file": "Rainbow_Cloud.png",
+    "title": "Rainbow Cloud",
+    "category": "Nature"
+  },
+  {
+    "file": "Rainbow_Poop.png",
+    "title": "Rainbow Poop",
+    "category": "Fun"
+  },
+  {
+    "file": "Red_Ring.png",
+    "title": "Red Ring",
+    "category": "Items"
+  },
+  {
+    "file": "Sand_Clock.png",
+    "title": "Sand Clock",
+    "category": "Objects"
+  },
+  {
+    "file": "Steak.png",
+    "title": "Steak",
+    "category": "Food"
+  },
+  {
+    "file": "Strawberry_Band_Aids.png",
+    "title": "Strawberry Band Aids",
+    "category": "Items"
+  },
+  {
+    "file": "Pinwheel.png",
+    "title": "Pinwheel",
+    "category": "Objects"
+  },
+  {
+    "file": "Tree.png",
+    "title": "Tree",
+    "category": "Nature"
+  },
+  {
+    "file": "Wi-Fi.png",
+    "title": "Wi-Fi",
+    "category": "UI"
+  }
 ]
