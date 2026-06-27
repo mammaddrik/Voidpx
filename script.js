@@ -51,19 +51,20 @@ if (toggleBtn) {
 
 // ---------- Elements ----------
 const gallery = document.querySelector(".content__box");
-const pagination = document.querySelector(".pagination");
-
 const pageNumber = document.getElementById("pageNumber");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const imageCount = document.getElementById("imageCount");
-
 const emptyState = document.getElementById("emptyState");
+
 const searchForm = document.getElementById("search");
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 
-// ---------- Search Helpers ----------
+const categoryToggle = document.getElementById("categoryToggle");
+const categoryLabel = categoryToggle?.querySelector("span");
+
+// ---------- Helpers ----------
 function normalize(text = "") {
   return String(text)
     .toLowerCase()
@@ -76,7 +77,6 @@ function getImageName(image) {
   if (typeof image === "string") {
     return image.split("/").pop() || "";
   }
-
   return image?.file || "";
 }
 
@@ -86,27 +86,27 @@ function loadStateFromUrl() {
 
   const page = Number.parseInt(params.get("page"), 10);
   const query = params.get("q") || "";
+  const category = params.get("category") || "All";
 
   return {
     page: Number.isNaN(page) || page < 1 ? 1 : page,
     query: query.trim(),
+    category: category.trim() || "All",
   };
 }
 
-function saveStateToUrl({ page, query }) {
+function saveStateToUrl({ page, query, category }) {
   const url = new URL(window.location.href);
 
-  if (page <= 1) {
-    url.searchParams.delete("page");
-  } else {
-    url.searchParams.set("page", String(page));
-  }
+  if (page <= 1) url.searchParams.delete("page");
+  else url.searchParams.set("page", String(page));
 
-  if (!query || query.trim() === "") {
-    url.searchParams.delete("q");
-  } else {
-    url.searchParams.set("q", query.trim());
-  }
+  if (!query) url.searchParams.delete("q");
+  else url.searchParams.set("q", query);
+
+  if (!category || category === "All")
+    url.searchParams.delete("category");
+  else url.searchParams.set("category", category);
 
   window.history.replaceState({}, "", url);
 }
@@ -119,6 +119,24 @@ let currentFilteredImages = [];
 let currentPage = initialUrlState.page;
 let imagesPerPage = 1;
 let lastAppliedQuery = normalize(initialUrlState.query);
+let selectedCategory = initialUrlState.category;
+
+// ---------- Category ----------
+function getCategories() {
+  const unique = new Set();
+
+  images.forEach((img) => {
+    if (img.category) unique.add(img.category);
+  });
+
+  return ["All", ...Array.from(unique).sort()];
+}
+
+function updateCategoryButton() {
+  if (categoryLabel) {
+    categoryLabel.textContent = selectedCategory.toUpperCase();
+  }
+}
 
 // ---------- Responsive Images Per Page ----------
 function getNumberFromCSSValue(value) {
@@ -136,13 +154,13 @@ function calculateImagesPerPage() {
 
   const minBoxSize = isLandscape ? 140 : 180;
 
-  const galleryStyles = window.getComputedStyle(gallery);
-  const paddingLeft = getNumberFromCSSValue(galleryStyles.paddingLeft);
-  const paddingRight = getNumberFromCSSValue(galleryStyles.paddingRight);
-  const paddingTop = getNumberFromCSSValue(galleryStyles.paddingTop);
-  const paddingBottom = getNumberFromCSSValue(galleryStyles.paddingBottom);
-  const columnGap = getNumberFromCSSValue(galleryStyles.columnGap);
-  const rowGap = getNumberFromCSSValue(galleryStyles.rowGap);
+  const styles = window.getComputedStyle(gallery);
+  const paddingLeft = getNumberFromCSSValue(styles.paddingLeft);
+  const paddingRight = getNumberFromCSSValue(styles.paddingRight);
+  const paddingTop = getNumberFromCSSValue(styles.paddingTop);
+  const paddingBottom = getNumberFromCSSValue(styles.paddingBottom);
+  const columnGap = getNumberFromCSSValue(styles.columnGap);
+  const rowGap = getNumberFromCSSValue(styles.rowGap);
 
   const usableWidth = galleryWidth - paddingLeft - paddingRight;
   const usableHeight = galleryHeight - paddingTop - paddingBottom;
@@ -162,24 +180,30 @@ function calculateImagesPerPage() {
   return Math.max(1, columns * rows);
 }
 
-// ---------- Filter Images ----------
+// ---------- Filter ----------
 function filterImages(query) {
   const normalizedQuery = normalize(query);
 
-  if (normalizedQuery === "") {
-    currentFilteredImages = [...images];
-    return;
-  }
-
   currentFilteredImages = images.filter((image) => {
+    const matchesCategory =
+      selectedCategory === "All" ||
+      image.category === selectedCategory;
+
+    if (!matchesCategory) return false;
+
+    if (normalizedQuery === "") return true;
+
     const normalizedTitle = normalize(image.title);
     return normalizedTitle.includes(normalizedQuery);
   });
 }
 
-// ---------- Pagination Helpers ----------
+// ---------- Pagination ----------
 function getTotalPages() {
-  return Math.max(1, Math.ceil(currentFilteredImages.length / imagesPerPage));
+  return Math.max(
+    1,
+    Math.ceil(currentFilteredImages.length / imagesPerPage)
+  );
 }
 
 function getCurrentQuery() {
@@ -190,24 +214,17 @@ function syncUrlState() {
   saveStateToUrl({
     page: currentPage,
     query: getCurrentQuery(),
+    category: selectedCategory,
   });
 }
 
 function clampCurrentPage() {
   const totalPages = getTotalPages();
-
-  if (currentPage > totalPages) {
-    currentPage = totalPages;
-  }
-
-  if (currentPage < 1) {
-    currentPage = 1;
-  }
-
-  syncUrlState();
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
 }
 
-// ---------- Show Page ----------
+// ---------- Render ----------
 function showPage() {
   if (!gallery) return;
 
@@ -263,22 +280,13 @@ function showPage() {
   updatePagination();
 }
 
-// ---------- Update Pagination UI ----------
 function updatePagination() {
   const isEmpty = currentFilteredImages.length === 0;
   const totalPages = isEmpty ? 1 : getTotalPages();
 
-  if (pageNumber) {
-    pageNumber.textContent = `${currentPage} / ${totalPages}`;
-  }
-
-  if (prevBtn) {
-    prevBtn.disabled = isEmpty || currentPage <= 1;
-  }
-
-  if (nextBtn) {
-    nextBtn.disabled = isEmpty || currentPage >= totalPages;
-  }
+  if (pageNumber) pageNumber.textContent = `${currentPage} / ${totalPages}`;
+  if (prevBtn) prevBtn.disabled = isEmpty || currentPage <= 1;
+  if (nextBtn) nextBtn.disabled = isEmpty || currentPage >= totalPages;
 
   if (imageCount) {
     const count = currentFilteredImages.length;
@@ -291,15 +299,22 @@ function updatePagination() {
 
   const pagination = document.querySelector(".pagination");
   if (pagination) {
-    pagination.classList.toggle("is-hidden", isEmpty || totalPages <= 1);
+    pagination.classList.toggle(
+      "is-hidden",
+      isEmpty || totalPages <= 1
+    );
   }
 }
 
-// ---------- Pagination Events ----------
+function refreshGallery() {
+  imagesPerPage = calculateImagesPerPage();
+  showPage();
+}
+
+// ---------- Events ----------
 if (prevBtn) {
   prevBtn.addEventListener("click", () => {
     if (currentPage <= 1) return;
-
     currentPage--;
     syncUrlState();
     showPage();
@@ -308,26 +323,20 @@ if (prevBtn) {
 
 if (nextBtn) {
   nextBtn.addEventListener("click", () => {
-    const totalPages = getTotalPages();
-
-    if (currentPage >= totalPages) return;
-
+    if (currentPage >= getTotalPages()) return;
     currentPage++;
     syncUrlState();
     showPage();
   });
 }
 
-// ---------- Search ----------
 function handleSearch() {
   if (!searchInput) return;
 
   const query = searchInput.value.trim();
   const normalizedQuery = normalize(query);
 
-  if (normalizedQuery === lastAppliedQuery) {
-    return;
-  }
+  if (normalizedQuery === lastAppliedQuery) return;
 
   filterImages(query);
   currentPage = 1;
@@ -337,29 +346,21 @@ function handleSearch() {
 }
 
 if (searchForm) {
-  searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-  });
+  searchForm.addEventListener("submit", (e) => e.preventDefault());
 }
 
 if (searchBtn) {
-  searchBtn.addEventListener("click", () => {
-    handleSearch();
-  });
+  searchBtn.addEventListener("click", handleSearch);
 }
 
 if (searchInput) {
-  searchInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") e.preventDefault();
   });
 
   searchInput.addEventListener("input", () => {
     const normalizedQuery = normalize(searchInput.value.trim());
-
-    if (normalizedQuery !== "") return;
-    if (lastAppliedQuery === "") return;
+    if (normalizedQuery !== "" || lastAppliedQuery === "") return;
 
     currentFilteredImages = [...images];
     currentPage = 1;
@@ -369,20 +370,26 @@ if (searchInput) {
   });
 }
 
-// ---------- Refresh Gallery ----------
-function refreshGallery() {
-  const newImagesPerPage = calculateImagesPerPage();
-  imagesPerPage = newImagesPerPage;
-  showPage();
+if (categoryToggle) {
+  categoryToggle.addEventListener("click", () => {
+    const categories = getCategories();
+    const currentIndex = categories.indexOf(selectedCategory);
+    const nextIndex = (currentIndex + 1) % categories.length;
+
+    selectedCategory = categories[nextIndex];
+    updateCategoryButton();
+
+    filterImages(getCurrentQuery());
+    currentPage = 1;
+    syncUrlState();
+    refreshGallery();
+  });
 }
 
-// ---------- Load Images From JSON ----------
+// ---------- Load Images ----------
 fetch("./assets/image/images.json")
   .then((res) => {
-    if (!res.ok) {
-      throw new Error("Could not load images.json");
-    }
-
+    if (!res.ok) throw new Error("Could not load images.json");
     return res.json();
   })
   .then((data) => {
@@ -392,6 +399,13 @@ fetch("./assets/image/images.json")
       title: item.title,
       category: item.category,
     }));
+
+    const categories = getCategories();
+    if (!categories.includes(selectedCategory)) {
+      selectedCategory = "All";
+    }
+
+    updateCategoryButton();
 
     if (searchInput) {
       searchInput.value = initialUrlState.query;
@@ -406,7 +420,7 @@ fetch("./assets/image/images.json")
     console.error("Failed to load images.json:", err);
   });
 
-// ---------- Resize Handling ----------
+// ---------- Resize ----------
 let resizeTimer;
 
 window.addEventListener("resize", () => {
@@ -414,15 +428,16 @@ window.addEventListener("resize", () => {
 
   resizeTimer = setTimeout(() => {
     const newImagesPerPage = calculateImagesPerPage();
-
     if (newImagesPerPage === imagesPerPage) return;
 
-    const firstVisibleImageIndex = (currentPage - 1) * imagesPerPage;
+    const firstVisibleIndex =
+      (currentPage - 1) * imagesPerPage;
 
     imagesPerPage = newImagesPerPage;
-    currentPage = Math.floor(firstVisibleImageIndex / imagesPerPage) + 1;
-    syncUrlState();
+    currentPage =
+      Math.floor(firstVisibleIndex / imagesPerPage) + 1;
 
+    syncUrlState();
     showPage();
   }, 150);
 });

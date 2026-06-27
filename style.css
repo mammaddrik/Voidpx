@@ -68,23 +68,28 @@ a {
 .nav__left {
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
 .nav__center {
   display: flex;
   justify-content: center;
+  min-width: 0;
 }
 
 .nav__right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 0.6rem;
+  min-width: 0;
 }
 
 .navbar__title {
   margin: 0;
   font-size: 2rem;
   color: var(--text-color);
+  white-space: nowrap;
 }
 
 /* ------------------ Search ------------------ */
@@ -93,6 +98,7 @@ a {
   display: flex;
   width: 100%;
   max-width: 420px;
+  min-width: 0;
 }
 
 .search__box input {
@@ -102,16 +108,8 @@ a {
   border-right: none;
   color: var(--text-color);
   font-family: inherit;
-  font-size: 16px;
   padding: 0.4rem 0.7rem;
-}
-
-.search__box input::placeholder {
-  color: var(--text-color);
-}
-
-.search__box input:focus {
-  outline: none;
+  min-width: 0;
 }
 
 .search__button {
@@ -126,6 +124,8 @@ a {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .search__button i {
@@ -137,40 +137,87 @@ a {
   transform: scale(1.1);
 }
 
+input::placeholder {
+  color: var(--text-color);
+}
+
+input:focus {
+  outline: none;
+}
+
 /* ------------------ Theme Button ------------------ */
 
 .theme__toggle {
   background: transparent;
-  margin-left: 1rem;
+  margin-left: 0;
   border: 2px solid var(--border-color);
   color: var(--text-color);
   font-family: inherit;
   padding: 0.3rem 0.6rem;
   cursor: pointer;
   line-height: 1;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .theme__toggle i {
   font-size: 0.9rem;
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .theme__toggle:active {
   transform: scale(1.1);
 }
 
-/* ------------------ Gallery Area ------------------ */
+/* ------------------ Category Button ------------------ */
 
-.content__collections {
-  position: relative;
-  flex: 1;
-  min-height: 0;
+.category__toggle {
+  background: transparent;
+  margin-left: 0;
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
+  font-family: inherit;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  line-height: 1;
+
+  width: 100px;
+  min-width: 100px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+
+  white-space: nowrap;
   overflow: hidden;
+  flex-shrink: 0;
 }
+
+.category__toggle i {
+  font-size: 0.9rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.category__toggle span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category__toggle:active {
+  transform: scale(1.08);
+}
+
+/* ------------------ Gallery Area ------------------ */
 
 .empty-state {
   position: absolute;
@@ -183,8 +230,18 @@ a {
   pointer-events: none;
 }
 
+.content__collections {
+  position: relative;
+}
+
 .empty-state.is-hidden {
   display: none;
+}
+
+.content__collections {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .content__box {
@@ -273,12 +330,7 @@ a {
   text-overflow: ellipsis;
 }
 
-/* ------------------ Gallery Bottom Panel ------------------ */
-
-.gallery-panel {
-  display: flex;
-  flex-direction: column;
-}
+/* ------------------ Pagination ------------------ */
 
 .pagination {
   min-height: 50px;
@@ -289,10 +341,6 @@ a {
   column-gap: 0.8rem;
   row-gap: 0;
   color: var(--text-color);
-}
-
-.pagination.is-hidden {
-  display: none;
 }
 
 #prevBtn {
@@ -319,7 +367,9 @@ a {
   font-size: 0.9rem;
   padding: 0.45rem 0.8rem;
   cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -351,6 +401,11 @@ a {
   font-size: 1rem;
   font-weight: bold;
   color: var(--text-color);
+}
+
+.pagination.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .gallery-info {
@@ -423,7 +478,7 @@ a {
   transform: scale(1.1);
 }
 
-/* ------------------ Mobile Layout ------------------ */
+/* ------------------ Mobile Gallery Layout ------------------ */
 
 @media (max-width: 700px) {
   .footer {
@@ -477,6 +532,7 @@ a {
     grid-column: 2 / 3;
     grid-row: 1;
     justify-self: end;
+    gap: 0.45rem;
   }
 
   .nav__center {
@@ -488,6 +544,18 @@ a {
   .search__box {
     width: 100%;
     max-width: none;
+  }
+
+  .theme__toggle span {
+    display: none;
+  }
+
+  .theme__toggle {
+    width: 36px;
+    min-width: 36px;
+    height: 34px;
+    padding: 0;
+    gap: 0;
   }
 }
 
