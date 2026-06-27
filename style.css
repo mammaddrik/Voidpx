@@ -3,6 +3,12 @@
   src: url("assets/font/LowresPixel-Regular.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Unixel";
+  src: url("assets/font/unixel-Regular.ttf") format("truetype");
+  unicode-range: U+0600-06FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
 /* ------------------ Base ------------------ */
 
 :root {
@@ -27,7 +33,7 @@ body {
   padding: 0;
   height: 100%;
   background: var(--bg-color);
-  font-family: "LowresPixel", monospace;
+  font-family: "Unixel", "LowresPixel", monospace;
   user-select: none;
   -webkit-user-select: none;
 }
