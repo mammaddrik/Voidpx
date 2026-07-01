@@ -308,7 +308,8 @@ function createFavoriteButton(imageId) {
   }`;
   icon.setAttribute("aria-hidden", "true");
   favBtn.appendChild(icon);
-  favBtn.addEventListener("click", () => {
+  favBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     const active = toggleFavorite(imageId);
     favBtn.classList.toggle("is-active", active);
     icon.className = `bi ${active ? "bi-heart-fill" : "bi-heart"}`;

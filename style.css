@@ -325,6 +325,17 @@ input:focus {
   padding: 8px;
   overflow: hidden;
   position: relative;
+  transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.gallery-card__image.is-pressed {
+  transform: scale(0.95);
+  filter: brightness(0.9);
+}
+
+.gallery-card__image:active {
+  transform: scale(0.95);
+  filter: brightness(0.9);
 }
 
 .gallery-card__image img {
@@ -407,7 +418,6 @@ input:focus {
 .fav-btn.is-active {
   color: #ff3b5c;
 }
-
 
 /* ------------------ Pagination ------------------ */
 
