@@ -295,6 +295,7 @@ input:focus {
   justify-content: center;
   padding: 8px;
   overflow: hidden;
+  position: relative;
 }
 
 .gallery-card__image img {
@@ -310,12 +311,23 @@ input:focus {
 
 .gallery-card__meta {
   border-top: 2px solid var(--border-color);
-  padding: 0.45rem 0.5rem;
+  padding: 0.35rem 0.5rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   background: var(--bg-color);
   color: var(--text-color);
+  gap: 0.4rem;
+  min-height: 42px;
+}
+
+.gallery-card__meta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .gallery-card__title {
@@ -334,6 +346,39 @@ input:focus {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+/* ------------------ Favorite Button ------------------ */
+
+.fav-btn {
+  position: static;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  z-index: 2;
+}
+
+.fav-btn i {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.fav-btn:active {
+  transform: scale(0.85);
+}
+
+.fav-btn.is-active {
+  color: #ff3b5c;
+}
+
 
 /* ------------------ Pagination ------------------ */
 
@@ -698,5 +743,16 @@ input:focus {
   .pagination {
     min-height: 50px;
     gap: 0.8rem;
+  }
+  
+  .fav-btn {
+    width: 24px;
+    height: 24px;
+    top: 4px;
+    right: 4px;
+  }
+
+  .fav-btn i {
+    font-size: 0.9rem;
   }
 }

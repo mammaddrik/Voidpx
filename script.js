@@ -219,6 +219,7 @@ function showPage() {
     const box = document.createElement("div");
     box.className = "box";
     box.style.animationDelay = `${index * 70}ms`;
+
     const imageWrapper = document.createElement("div");
     imageWrapper.className = "gallery-card__image";
     const img = document.createElement("img");
@@ -227,21 +228,55 @@ function showPage() {
     img.loading = "lazy";
     img.decoding = "async";
     imageWrapper.appendChild(img);
+
+    const imageId = image.file;
+    const isLiked = localStorage.getItem(`fav_${imageId}`) === "true";
+
+    const favBtn = document.createElement("button");
+    favBtn.type = "button";
+    favBtn.className = "fav-btn";
+    if (isLiked) {
+      favBtn.classList.add("is-active");
+    }
+    favBtn.setAttribute("aria-label", "Add to favorites");
+    favBtn.innerHTML = `<i class="bi bi-heart${isLiked ? "-fill" : ""}" aria-hidden="true"></i>`;
+
+    favBtn.addEventListener("click", () => {
+      const isActive = favBtn.classList.toggle("is-active");
+      const icon = favBtn.querySelector("i");
+      if (isActive) {
+        icon.className = "bi bi-heart-fill";
+        localStorage.setItem(`fav_${imageId}`, "true");
+      } else {
+        icon.className = "bi bi-heart";
+        localStorage.removeItem(`fav_${imageId}`);
+      }
+    });
+
     const meta = document.createElement("div");
     meta.className = "gallery-card__meta";
+
+    const metaText = document.createElement("div");
+    metaText.className = "gallery-card__meta-text";
+
     const title = document.createElement("h3");
     title.className = "gallery-card__title";
     title.textContent = image.title || getImageName(image);
+    
     const category = document.createElement("span");
     category.className = "gallery-card__category";
     category.textContent = image.category || "Uncategorized";
-    meta.append(title, category);
+    
+    metaText.append(title, category);
+    meta.append(metaText, favBtn);
+
     box.append(imageWrapper, meta);
     fragment.appendChild(box);
   });
   gallery.appendChild(fragment);
   updatePagination();
 }
+
 
 function updatePagination() {
   const isEmpty = currentFilteredImages.length === 0;
