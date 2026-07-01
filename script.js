@@ -7,7 +7,6 @@ function updateThemeButton(isLight) {
   if (toggleLabel) {
     toggleLabel.textContent = isLight ? "LIGHT" : "DARK";
   }
-
   if (toggleIcon) {
     toggleIcon.className = isLight
       ? "bi bi-sun-fill"
@@ -58,6 +57,8 @@ const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 const categoryToggle = document.getElementById("categoryToggle");
 const categoryLabel = categoryToggle?.querySelector("span");
+const favoritesBtn = document.getElementById("favoritesBtn");
+const favoritesIcon = favoritesBtn?.querySelector("i");
 
 // ---------- Helpers ----------
 function normalize(text = "") {
@@ -75,6 +76,38 @@ function getImageName(image) {
   return image?.file || "";
 }
 
+// ---------- Favorites ----------
+function getFavorites() {
+  try {
+    return JSON.parse(localStorage.getItem("voidpx_favorites")) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveFavorites(favorites) {
+  localStorage.setItem(
+    "voidpx_favorites",
+    JSON.stringify(favorites)
+  );
+}
+
+function isFavorite(id) {
+  return getFavorites().includes(id);
+}
+
+function toggleFavorite(id) {
+  const favorites = getFavorites();
+  const index = favorites.indexOf(id);
+  if (index === -1) {
+    favorites.push(id);
+  } else {
+    favorites.splice(index, 1);
+  }
+  saveFavorites(favorites);
+  return favorites.includes(id);
+}
+
 // ---------- URL State ----------
 function loadStateFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -90,13 +123,21 @@ function loadStateFromUrl() {
 
 function saveStateToUrl({ page, query, category }) {
   const url = new URL(window.location.href);
-  if (page <= 1) url.searchParams.delete("page");
-  else url.searchParams.set("page", String(page));
-  if (!query) url.searchParams.delete("q");
-  else url.searchParams.set("q", query);
-  if (!category || category === "All")
+  if (page <= 1) {
+    url.searchParams.delete("page");
+  } else {
+    url.searchParams.set("page", String(page));
+  }
+  if (!query) {
+    url.searchParams.delete("q");
+  } else {
+    url.searchParams.set("q", query);
+  }
+  if (!category || category === "All") {
     url.searchParams.delete("category");
-  else url.searchParams.set("category", category);
+  } else {
+    url.searchParams.set("category", category);
+  }
   window.history.replaceState({}, "", url);
 }
 
@@ -110,24 +151,46 @@ let imagesPerPage = 1;
 let lastAppliedQuery = normalize(initialUrlState.query);
 let selectedCategory = initialUrlState.category;
 let resizeTimer;
-
+let favoritesMode = false;
 
 // ---------- Category ----------
 function getCategories() {
   const unique = new Set();
   images.forEach((img) => {
-    if (img.category) unique.add(img.category);
+    if (img.category) {
+      unique.add(img.category);
+    }
   });
   return ["All", ...Array.from(unique).sort()];
 }
 
 function updateCategoryButton() {
-  if (categoryLabel) {
-    categoryLabel.textContent = selectedCategory.toUpperCase();
-  }
+  if (!categoryLabel) return;
+  categoryLabel.textContent =
+    selectedCategory.toUpperCase();
 }
 
-// ---------- Responsive Images Per Page ----------
+// ---------- Favorites Mode ----------
+if (favoritesBtn) {
+  favoritesBtn.addEventListener("click", () => {
+
+    favoritesMode = !favoritesMode;
+
+    favoritesBtn.classList.toggle("is-active", favoritesMode);
+
+    if (favoritesIcon) {
+      favoritesIcon.className = favoritesMode
+        ? "bi bi-heart-fill"
+        : "bi bi-heart";
+    }
+
+    filterImages(getCurrentQuery());
+    currentPage = 1;
+    refreshGallery();
+  });
+}
+
+// ---------- Responsive ----------
 function getNumberFromCSSValue(value) {
   return Number.parseFloat(value) || 0;
 }
@@ -136,8 +199,9 @@ function calculateImagesPerPage() {
   if (!gallery) return 1;
   const galleryWidth = gallery.clientWidth;
   const galleryHeight = gallery.clientHeight;
-  const isLandscape =
-    window.matchMedia("(max-height: 480px) and (orientation: landscape)").matches;
+  const isLandscape = window.matchMedia(
+    "(max-height: 480px) and (orientation: landscape)"
+  ).matches;
   const minBoxSize = isLandscape ? 140 : 180;
   const styles = window.getComputedStyle(gallery);
   const paddingLeft = getNumberFromCSSValue(styles.paddingLeft);
@@ -146,16 +210,26 @@ function calculateImagesPerPage() {
   const paddingBottom = getNumberFromCSSValue(styles.paddingBottom);
   const columnGap = getNumberFromCSSValue(styles.columnGap);
   const rowGap = getNumberFromCSSValue(styles.rowGap);
-  const usableWidth = galleryWidth - paddingLeft - paddingRight;
-  const usableHeight = galleryHeight - paddingTop - paddingBottom;
-  if (usableWidth <= 0 || usableHeight <= 0) return 1;
+  const usableWidth =
+    galleryWidth - paddingLeft - paddingRight;
+  const usableHeight =
+    galleryHeight - paddingTop - paddingBottom;
+  if (usableWidth <= 0 || usableHeight <= 0) {
+    return 1;
+  }
   const columns = Math.max(
     1,
-    Math.floor((usableWidth + columnGap) / (minBoxSize + columnGap))
+    Math.floor(
+      (usableWidth + columnGap) /
+        (minBoxSize + columnGap)
+    )
   );
   const rows = Math.max(
     1,
-    Math.floor((usableHeight + rowGap) / (minBoxSize + rowGap))
+    Math.floor(
+      (usableHeight + rowGap) /
+        (minBoxSize + rowGap)
+    )
   );
   return Math.max(1, columns * rows);
 }
@@ -163,22 +237,33 @@ function calculateImagesPerPage() {
 // ---------- Filter ----------
 function filterImages(query) {
   const normalizedQuery = normalize(query);
+  const favorites = getFavorites();
   currentFilteredImages = images.filter((image) => {
+    if (favoritesMode && !favorites.includes(image.file)) {
+      return false;
+    }
     const matchesCategory =
       selectedCategory === "All" ||
-      image.category === selectedCategory;
-    if (!matchesCategory) return false;
-    if (normalizedQuery === "") return true;
+      normalize(image.category) === normalize(selectedCategory);
+    if (!matchesCategory) {
+      return false;
+    }
+    if (normalizedQuery === "") {
+      return true;
+    }
     const normalizedTitle = normalize(image.title);
     return normalizedTitle.includes(normalizedQuery);
   });
 }
 
+
 // ---------- Pagination ----------
 function getTotalPages() {
   return Math.max(
     1,
-    Math.ceil(currentFilteredImages.length / imagesPerPage)
+    Math.ceil(
+      currentFilteredImages.length / imagesPerPage
+    )
   );
 }
 
@@ -196,11 +281,78 @@ function syncUrlState() {
 
 function clampCurrentPage() {
   const totalPages = getTotalPages();
-  if (currentPage > totalPages) currentPage = totalPages;
-  if (currentPage < 1) currentPage = 1;
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+  if (currentPage < 1) {
+    currentPage = 1;
+  }
 }
 
 // ---------- Render ----------
+function createFavoriteButton(imageId) {
+  const liked = isFavorite(imageId);
+  const favBtn = document.createElement("button");
+  favBtn.type = "button";
+  favBtn.className = "fav-btn";
+  favBtn.setAttribute(
+    "aria-label",
+    "Add to favorites"
+  );
+  if (liked) {
+    favBtn.classList.add("is-active");
+  }
+  const icon = document.createElement("i");
+  icon.className = `bi ${
+    liked ? "bi-heart-fill" : "bi-heart"
+  }`;
+  icon.setAttribute("aria-hidden", "true");
+  favBtn.appendChild(icon);
+  favBtn.addEventListener("click", () => {
+    const active = toggleFavorite(imageId);
+    favBtn.classList.toggle("is-active", active);
+    icon.className = `bi ${active ? "bi-heart-fill" : "bi-heart"}`;
+    if (favoritesMode && !active) {
+      filterImages(getCurrentQuery());
+      refreshGallery();
+    }
+  });
+  return favBtn;
+}
+
+function createImageCard(image, index) {
+  const box = document.createElement("div");
+  box.className = "box";
+  box.style.animationDelay = `${index * 70}ms`;
+  const imageWrapper = document.createElement("div");
+  imageWrapper.className = "gallery-card__image";
+  const img = document.createElement("img");
+  img.src = image.src;
+  img.alt = image.title || getImageName(image);
+  img.loading = "lazy";
+  img.decoding = "async";
+  imageWrapper.appendChild(img);
+  const meta = document.createElement("div");
+  meta.className = "gallery-card__meta";
+  const metaText = document.createElement("div");
+  metaText.className = "gallery-card__meta-text";
+  const title = document.createElement("h3");
+  title.className = "gallery-card__title";
+  title.textContent =
+    image.title || getImageName(image);
+  const category = document.createElement("span");
+  category.className =
+    "gallery-card__category";
+  category.textContent =
+    image.category || "Uncategorized";
+  metaText.append(title, category);
+  const favoriteButton =
+    createFavoriteButton(image.file);
+  meta.append(metaText, favoriteButton);
+  box.append(imageWrapper, meta);
+  return box;
+}
+
 function showPage() {
   if (!gallery) return;
   clampCurrentPage();
@@ -209,89 +361,57 @@ function showPage() {
     updatePagination();
     return;
   }
-  const startIndex = (currentPage - 1) * imagesPerPage;
-  const pageImages = currentFilteredImages.slice(
-    startIndex,
-    startIndex + imagesPerPage
-  );
-  const fragment = document.createDocumentFragment();
+  const startIndex =
+    (currentPage - 1) * imagesPerPage;
+  const pageImages =
+    currentFilteredImages.slice(
+      startIndex,
+      startIndex + imagesPerPage
+    );
+  const fragment =
+    document.createDocumentFragment();
   pageImages.forEach((image, index) => {
-    const box = document.createElement("div");
-    box.className = "box";
-    box.style.animationDelay = `${index * 70}ms`;
-
-    const imageWrapper = document.createElement("div");
-    imageWrapper.className = "gallery-card__image";
-    const img = document.createElement("img");
-    img.src = image.src;
-    img.alt = image.title || getImageName(image);
-    img.loading = "lazy";
-    img.decoding = "async";
-    imageWrapper.appendChild(img);
-
-    const imageId = image.file;
-    const isLiked = localStorage.getItem(`fav_${imageId}`) === "true";
-
-    const favBtn = document.createElement("button");
-    favBtn.type = "button";
-    favBtn.className = "fav-btn";
-    if (isLiked) {
-      favBtn.classList.add("is-active");
-    }
-    favBtn.setAttribute("aria-label", "Add to favorites");
-    favBtn.innerHTML = `<i class="bi bi-heart${isLiked ? "-fill" : ""}" aria-hidden="true"></i>`;
-
-    favBtn.addEventListener("click", () => {
-      const isActive = favBtn.classList.toggle("is-active");
-      const icon = favBtn.querySelector("i");
-      if (isActive) {
-        icon.className = "bi bi-heart-fill";
-        localStorage.setItem(`fav_${imageId}`, "true");
-      } else {
-        icon.className = "bi bi-heart";
-        localStorage.removeItem(`fav_${imageId}`);
-      }
-    });
-
-    const meta = document.createElement("div");
-    meta.className = "gallery-card__meta";
-
-    const metaText = document.createElement("div");
-    metaText.className = "gallery-card__meta-text";
-
-    const title = document.createElement("h3");
-    title.className = "gallery-card__title";
-    title.textContent = image.title || getImageName(image);
-    
-    const category = document.createElement("span");
-    category.className = "gallery-card__category";
-    category.textContent = image.category || "Uncategorized";
-    
-    metaText.append(title, category);
-    meta.append(metaText, favBtn);
-
-    box.append(imageWrapper, meta);
-    fragment.appendChild(box);
+    fragment.appendChild(
+      createImageCard(image, index)
+    );
   });
   gallery.appendChild(fragment);
   updatePagination();
 }
 
-
+// ---------- Pagination UI ----------
 function updatePagination() {
-  const isEmpty = currentFilteredImages.length === 0;
-  const totalPages = isEmpty ? 1 : getTotalPages();
-  if (pageNumber) pageNumber.textContent = `${currentPage} / ${totalPages}`;
-  if (prevBtn) prevBtn.disabled = isEmpty || currentPage <= 1;
-  if (nextBtn) nextBtn.disabled = isEmpty || currentPage >= totalPages;
+  const isEmpty =
+    currentFilteredImages.length === 0;
+  const totalPages = isEmpty
+    ? 1
+    : getTotalPages();
+  if (pageNumber) {
+    pageNumber.textContent =
+      `${currentPage} / ${totalPages}`;
+  }
+  if (prevBtn) {
+    prevBtn.disabled =
+      isEmpty || currentPage <= 1;
+  }
+  if (nextBtn) {
+    nextBtn.disabled =
+      isEmpty || currentPage >= totalPages;
+  }
   if (imageCount) {
-    const count = currentFilteredImages.length;
-    imageCount.textContent = `${count} image${count === 1 ? "" : "s"}`;
+    const count =
+      currentFilteredImages.length;
+    imageCount.textContent =
+      `${count} image${count === 1 ? "" : "s"}`;
   }
   if (emptyState) {
-    emptyState.classList.toggle("is-hidden", !isEmpty);
+    emptyState.classList.toggle(
+      "is-hidden",
+      !isEmpty
+    );
   }
-  const pagination = document.querySelector(".pagination");
+  const pagination =
+    document.querySelector(".pagination");
   if (pagination) {
     pagination.classList.toggle(
       "is-hidden",
@@ -324,11 +444,15 @@ if (nextBtn) {
   });
 }
 
+// ---------- Search ----------
 function handleSearch() {
   if (!searchInput) return;
   const query = searchInput.value.trim();
-  const normalizedQuery = normalize(query);
-  if (normalizedQuery === lastAppliedQuery) return;
+  const normalizedQuery =
+    normalize(query);
+  if (normalizedQuery === lastAppliedQuery) {
+    return;
+  }
   filterImages(query);
   currentPage = 1;
   lastAppliedQuery = normalizedQuery;
@@ -337,46 +461,81 @@ function handleSearch() {
 }
 
 if (searchForm) {
-  searchForm.addEventListener("submit", (e) => e.preventDefault());
+  searchForm.addEventListener(
+    "submit",
+    (e) => e.preventDefault()
+  );
 }
 
 if (searchBtn) {
-  searchBtn.addEventListener("click", handleSearch);
+  searchBtn.addEventListener(
+    "click",
+    handleSearch
+  );
 }
 
 if (searchInput) {
-  searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") e.preventDefault();
-  });
-  searchInput.addEventListener("input", () => {
-    const normalizedQuery = normalize(searchInput.value.trim());
-    if (normalizedQuery !== "" || lastAppliedQuery === "") return;
-    currentFilteredImages = [...images];
-    currentPage = 1;
-    lastAppliedQuery = "";
-    syncUrlState();
-    refreshGallery();
-  });
+  searchInput.addEventListener(
+    "keydown",
+    (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+      }
+    }
+  );
+  searchInput.addEventListener(
+    "input",
+    () => {
+      const normalizedQuery = normalize(
+        searchInput.value.trim()
+      );
+      if (
+        normalizedQuery === "" &&
+        lastAppliedQuery !== ""
+      ) {
+        filterImages("");
+        currentPage = 1;
+        lastAppliedQuery = "";
+        syncUrlState();
+        refreshGallery();
+      }
+    }
+  );
 }
 
+// ---------- Category ----------
 if (categoryToggle) {
-  categoryToggle.addEventListener("click", () => {
-    const categories = getCategories();
-    const currentIndex = categories.indexOf(selectedCategory);
-    const nextIndex = (currentIndex + 1) % categories.length;
-    selectedCategory = categories[nextIndex];
-    updateCategoryButton();
-    filterImages(getCurrentQuery());
-    currentPage = 1;
-    syncUrlState();
-    refreshGallery();
-  });
+  categoryToggle.addEventListener(
+    "click",
+    () => {
+      const categories =
+        getCategories();
+      const currentIndex =
+        categories.indexOf(
+          selectedCategory
+        );
+      const nextIndex =
+        (currentIndex + 1) %
+        categories.length;
+      selectedCategory =
+        categories[nextIndex];
+      updateCategoryButton();
+      filterImages(getCurrentQuery());
+      currentPage = 1;
+      syncUrlState();
+      refreshGallery();
+    }
+  );
 }
 
 // ---------- Load Images ----------
 fetch("./assets/image/images.json")
   .then((res) => {
-    if (!res.ok) throw new Error("Could not load images.json");
+    if (!res.ok) {
+      throw new Error(
+        "Could not load images.json"
+      );
+    }
     return res.json();
   })
   .then((data) => {
@@ -387,19 +546,31 @@ fetch("./assets/image/images.json")
       category: item.category,
     }));
     const categories = getCategories();
-    if (!categories.includes(selectedCategory)) {
+    if (
+      !categories.includes(
+        selectedCategory
+      )
+    ) {
       selectedCategory = "All";
     }
     updateCategoryButton();
     if (searchInput) {
-      searchInput.value = initialUrlState.query;
+      searchInput.value =
+        initialUrlState.query;
     }
-    filterImages(initialUrlState.query);
-    lastAppliedQuery = normalize(initialUrlState.query);
+    filterImages(
+      initialUrlState.query
+    );
+    lastAppliedQuery = normalize(
+      initialUrlState.query
+    );
     refreshGallery();
   })
   .catch((err) => {
-    console.error("Failed to load images.json:", err);
+    console.error(
+      "Failed to load images.json:",
+      err
+    );
   });
 
 // ---------- Resize ----------
@@ -407,11 +578,24 @@ window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
     requestAnimationFrame(() => {
-      const newImagesPerPage = calculateImagesPerPage();
-      if (newImagesPerPage === imagesPerPage) return;
-      const firstVisibleIndex = (currentPage - 1) * imagesPerPage;
-      imagesPerPage = newImagesPerPage;
-      currentPage = Math.floor(firstVisibleIndex / imagesPerPage) + 1;
+      const newImagesPerPage =
+        calculateImagesPerPage();
+      if (
+        newImagesPerPage ===
+        imagesPerPage
+      ) {
+        return;
+      }
+      const firstVisibleIndex =
+        (currentPage - 1) *
+        imagesPerPage;
+      imagesPerPage =
+        newImagesPerPage;
+      currentPage =
+        Math.floor(
+          firstVisibleIndex /
+            imagesPerPage
+        ) + 1;
       syncUrlState();
       showPage();
     });
