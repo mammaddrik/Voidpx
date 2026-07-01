@@ -109,6 +109,8 @@ let currentPage = initialUrlState.page;
 let imagesPerPage = 1;
 let lastAppliedQuery = normalize(initialUrlState.query);
 let selectedCategory = initialUrlState.category;
+let resizeTimer;
+
 
 // ---------- Category ----------
 function getCategories() {
@@ -366,18 +368,17 @@ fetch("./assets/image/images.json")
   });
 
 // ---------- Resize ----------
-let resizeTimer;
 window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
-    const newImagesPerPage = calculateImagesPerPage();
-    if (newImagesPerPage === imagesPerPage) return;
-    const firstVisibleIndex =
-      (currentPage - 1) * imagesPerPage;
-    imagesPerPage = newImagesPerPage;
-    currentPage =
-      Math.floor(firstVisibleIndex / imagesPerPage) + 1;
-    syncUrlState();
-    showPage();
+    requestAnimationFrame(() => {
+      const newImagesPerPage = calculateImagesPerPage();
+      if (newImagesPerPage === imagesPerPage) return;
+      const firstVisibleIndex = (currentPage - 1) * imagesPerPage;
+      imagesPerPage = newImagesPerPage;
+      currentPage = Math.floor(firstVisibleIndex / imagesPerPage) + 1;
+      syncUrlState();
+      showPage();
+    });
   }, 150);
 });

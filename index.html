@@ -2,10 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="theme-color" content="#0b0f1a">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Voidpx | Pixel Collection</title>
     <meta name="description" content="Voidpx pixel art collection and creative experiments."/>
+    <meta property="og:title" content="Voidpx | Pixel Collection">
+    <meta property="og:description" content="Voidpx pixel art collection and creative experiments.">
+    <meta property="og:image" content="assets/image/og.jpg">
     <link rel="icon" type="image/x-icon" href="assets/image/favicon.ico" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
   </head>
@@ -13,7 +18,6 @@
   <body>
     <main class="frame">
       <header class="navbar">
-
         <div class="nav__left">
           <h1 class="navbar__title">VOIDPX</h1>
         </div>
@@ -24,21 +28,22 @@
               id="searchInput"
               type="text"
               placeholder="Search by title..."
+              autocomplete="off"
             />
-            <button type="button" id="searchBtn" class="search__button">
-              <i class="bi bi-search"></i>
+            <button type="submit" id="searchBtn" class="search__button" aria-label="Search Collection">
+              <i class="bi bi-search" aria-hidden="true"></i>
               <span>Search</span>
             </button>
           </form>
         </div>
 
         <div class="nav__right">
-          <button id="categoryToggle" class="category__toggle" type="button">
-            <i class="bi bi-grid-3x3-gap-fill"></i>
+          <button id="categoryToggle" class="category__toggle" data-category="ALL" type="button" aria-label="Toggle category filter">
+            <i class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>
             <span>ALL</span>
           </button>
-          <button id="themeToggle" class="theme__toggle" type="button">
-            <i class="bi bi-moon-stars-fill"></i>
+          <button id="themeToggle" class="theme__toggle" data-theme="dark" type="button" aria-label="Toggle theme">
+            <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
             <span>DARK</span>
           </button>
         </div>
@@ -46,19 +51,19 @@
 
       <section class="content__collections">
         <div class="content__box"></div>
-        <p id="emptyState" class="empty-state is-hidden">No results found</p>
+        <p id="emptyState" role="status" class="empty-state is-hidden">No results found</p>
       </section>
 
       <section class="gallery-panel">
         <div class="pagination">
-          <button id="prevBtn" class="page__btn" disabled>
-            <i class="bi bi-chevron-left"></i>
+          <button id="prevBtn" class="page__btn" aria-label="Previous page" disabled>
+            <i class="bi bi-chevron-left" aria-hidden="true"></i>
             <span>PREV</span>
           </button>
           <span id="pageNumber">1 / 1</span>
-          <button id="nextBtn" class="page__btn">
+          <button id="nextBtn" class="page__btn" aria-label="Next page">
             <span>NEXT</span>
-            <i class="bi bi-chevron-right"></i>
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
           </button>
         </div>
         <div class="gallery-info">
@@ -68,20 +73,20 @@
 
       <footer class="footer">
         <div class="footer__logo">
-          <a href="https://github.com/mammaddrik" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-github"></i>
+          <a href="https://github.com/mammaddrik" target="_blank" rel="noopener noreferrer" aria-label="Mammad GitHub">
+            <i class="bi bi-github" aria-hidden="true"></i>
           </a>
-          <a href="https://www.linkedin.com/in/mammaddrik/" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-linkedin"></i>
+          <a href="https://www.linkedin.com/in/mammaddrik/" target="_blank" rel="noopener noreferrer" aria-label="Mammad LinkedIn">
+            <i class="bi bi-linkedin" aria-hidden="true"></i>
           </a>
         </div>
-        <p>© 2026 VOIDPX - ALL RIGHTS RESERVED</p>
+        <p class="footer__copyright">© 2026 VOIDPX - ALL RIGHTS RESERVED</p>
         <div class="footer__logo">
-          <a href="https://github.com/hamid-adler" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-github"></i>
+          <a href="https://github.com/hamid-adler" target="_blank" rel="noopener noreferrer" aria-label="Hamid GitHub">
+            <i class="bi bi-github" aria-hidden="true"></i>
           </a>
-          <a href="https://www.linkedin.com/in/hamid-adler" target="_blank" rel="noopener noreferrer">
-            <i class="bi bi-linkedin"></i>
+          <a href="https://www.linkedin.com/in/hamid-adler" target="_blank" rel="noopener noreferrer" aria-label="Hamid LinkedIn">
+            <i class="bi bi-linkedin" aria-hidden="true"></i>
           </a>
         </div>
       </footer>

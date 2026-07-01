@@ -25,6 +25,7 @@ body.light {
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -302,6 +303,7 @@ input:focus {
   object-fit: contain;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  will-change: auto;
 }
 
 /* ----- Meta Section ----- */
