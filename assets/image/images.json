@@ -8,206 +8,248 @@
   {
     "file": "Arcade.png",
     "title": "Arcade Machine",
-    "category": "Objects"
+    "category": "Objects",
+    "palette": ["#3bba64", "#32d96f", "#693189", "#815e95", "#8553a1", "#b971db", "#f357da", "#7ea4d4", "#a7ff99", "#ff93ee", "#f6bced", "#99d9ff", "#a2cde7", "#bfe5f0", "#dbf7ff", "#ffffff"]
   },
   {
     "file": "Band_Aids.png",
     "title": "Band Aids",
-    "category": "Items"
+    "category": "Items",
+    "palette": ["#b67100", "#f9b56a", "#ffc78b", "#ffd2a1", "#f6edc7", "#fffeec"]
+
   },
   {
     "file": "Blue_Ring.png",
     "title": "Blue Ring",
-    "category": "Items"
+    "category": "Items",
+    "palette": ["#dd7200", "#f1a24d", "#008af1", "#3cc5ff", "#76d6ff", "#fffd8a", "#a8f4ff", "#ffffff"]
   },
   {
     "file": "Cactus.png",
     "title": "Cactus",
-    "category": "Nature"
+    "category": "Nature",
+    "palette": ["#000000", "#692810", "#495c0f", "#b75732", "#a3255a", "#9cbe2e", "#a9b727", "#d7de33", "#eaf23b", "#fe70ac", "#ffb093"]
   },
   {
     "file": "Cat.png",
     "title": "Cat",
-    "category": "Animals"
+    "category": "Animals",
+    "palette": ["#000000", "#fa8618", "#feaa5a"]
   },
   {
     "file": "Cats_Paw.png",
     "title": "Cat Paw",
-    "category": "Animals"
+    "category": "Animals",
+    "palette": ["#d15900", "#ff7b09", "#ff7b75", "#ff9537", "#ffc071", "#ff7397", "#73b1ff", "#fffedc", "#defbff"]
   },
   {
     "file": "Chair.png",
     "title": "Chair",
-    "category": "Objects"
+    "category": "Objects",
+    "palette": ["#891838", "#9a2342", "#a62d4f", "#ff6264", "#3148eb", "#60a0ff", "#3cc6e5", "#60e2ff"]
   },
   {
     "file": "Cheese.png",
     "title": "Cheese",
-    "category": "Food"
+    "category": "Food",
+    "palette": ["#ed8e00", "#ff9e33", "#ffb929", "#ff9d63", "#ffde43", "#ffc650", "#ffcf6c", "#ffc17c", "#ffdb8f", "#fff48f", "#fff9c6"]
   },
   {
     "file": "Coin.png",
     "title": "Coin",
-    "category": "Items"
+    "category": "Items",
+    "palette": ["#e79902", "#e89a02", "#f5b400", "#e1db03", "#7792c7"]
   },
   {
     "file": "Cow.png",
     "title": "Cow",
-    "category": "Animals"
+    "category": "Animals",
+    "palette": ["#000000", "#efb9bc", "#ffffff"]
   },
   {
     "file": "Crown.png",
     "title": "Crown",
-    "category": "Items"
+    "category": "Items",
+    "palette": ["#652800", "#ce240e", "#e12205", "#ff2205", "#894416", "#c06200", "#db7915", "#e79000", "#ffb130", "#ffc830", "#ffd841", "#ffa69a", "#ffffff"]
   },
   {
     "file": "Dog.png",
     "title": "Dog",
-    "category": "Animals"
+    "category": "Animals",
+    "palette": ["#4c2d19", "#964e20", "#ffffff"]
   },
   {
     "file": "Donut.png",
     "title": "Donut",
-    "category": "Food"
+    "category": "Food",
+    "palette": ["#94004a", "#e6007b", "#ff9a4a", "#e1eb4a", "#e171bd", "#ffbe8c", "#ffdf8c", "#e1aed6", "#e1d2e6"]
   },
   {
     "file": "Feather.png",
     "title": "Feather",
-    "category": "Nature"
+    "category": "Nature",
+    "palette": ["#46231c", "#ffa6a6", "#ffca8f", "#ffa6cb", "#e7a6ff", "#bcffc3", "#8fedff", "#ffffff"]
   },
   {
     "file": "Fire.png",
     "title": "Fire",
-    "category": "Effects"
+    "category": "Effects",
+    "palette": ["#7e1308", "#ff6949", "#ff9a43", "#ff9a61", "#ffdb5a", "#ffffff"]
   },
   {
     "file": "Flower.png",
     "title": "Flower",
-    "category": "Nature"
+    "category": "Nature",
+    "palette": ["#c62b2b", "#e35252", "#fa7979", "#56d220", "#65e02f", "#75e743", "#8bf85c"]
   },
   {
     "file": "Four_Leaved_Clover.png",
     "title": "Four Leaf Clover",
-    "category": "Nature"
+    "category": "Nature",
+    "palette": ["#065b00", "#098600", "#8cbe30"]
   },
   {
     "file": "Health_Bar.png",
     "title": "Health Bar",
-    "category": "UI"
+    "category": "UI",
+    "palette": ["#262b44", "#b51818", "#bf383f", "#df1616", "#bd5b1c", "#af7620", "#f57522", "#e43b44", "#61aa21", "#ae9a24", "#92a925", "#efa431", "#a5f75e", "#d2eb5a", "#fde661", "#25a781", "#61fed0", "#e8dfa7", "#ffffff"]
   },
   {
     "file": "HollowKnight_TheKnight.png",
     "title": "The Knight",
-    "category": "Characters"
+    "category": "Characters",
+    "palette": ["#000000", "#6499a9", "#ffffff"]
   },
   {
     "file": "Ice_Cream.png",
     "title": "Ice Cream",
-    "category": "Food"
+    "category": "Food",
+    "palette": ["#c42d3a", "#cc7314", "#e5444e", "#ef525c", "#5cb31d", "#dba120", "#f5a134", "#f8b04f", "#e3a963", "#90dc56", "#9ff35f", "#f6c559", "#f6e859", "#8048bf", "#a272d9", "#379ec2", "#5abbdc", "#7ad1f0", "#fddcb4", "#bc94df", "#ffffff"]
   },
   {
     "file": "Koala.png",
     "title": "Koala",
-    "category": "Animals"
+    "category": "Animals",
+    "palette": ["#3f0c0d", "#601919", "#344506", "#41560c", "#933121", "#e47842", "#7fa23b", "#ef9258", "#ffb98c", "#fff0e8", "#ffffff"]
   },
   {
     "file": "Magic_Ball.png",
     "title": "Magic Ball",
-    "category": "Items"
+    "category": "Items",
+    "palette": ["#28123b", "#ffc34e", "#7bf9ff", "#a0fbb6", "#ffee89", "#a5a9ff", "#fb98f1", "#ffb1fd", "#87d2ff", "#ffffff"]
   },
   {
     "file": "Moon_Ball.png",
     "title": "Moon Ball",
-    "category": "Items"
+    "category": "Items",
+    "palette": ["#cd3300", "#fc4f31", "#fd7e68", "#ff9808", "#a6e30d", "#ffe41d", "#ffff4a", "#d2fe63", "#007efc", "#85fdff", "#ffffff"]
   },
   {
     "file": "Mouse.png",
     "title": "Mouse",
-    "category": "Animals"
+    "category": "Animals",
+    "palette": ["#000000", "#a39387", "#cfbeb1", "#f8a2a2", "#f8e6d8"]
   },
   {
     "file": "Nail_Polish.png",
     "title": "Nail Polish",
-    "category": "Objects"
+    "category": "Objects",
+    "palette": ["#2a1200", "#711e1e", "#542501", "#6c360d", "#8e260a", "#a32909", "#b43310", "#d2380f", "#985b2d", "#cd5800", "#da4c26", "#ff913f", "#ffa086", "#b9d6d8", "#e4feff", "#ffffff"]
   },
   {
     "file": "Octopus.png",
     "title": "Octopus",
-    "category": "Animals"
+    "category": "Animals",
+    "palette": ["#2e0017", "#6e0444", "#7a0d4f", "#98236a", "#ffca08", "#c94b8b", "#f36da8", "#eba0bf"]
   },
   {
     "file": "Orange.png",
     "title": "Orange",
-    "category": "Food"
+    "category": "Food",
+    "palette": ["#c94900", "#e6a800", "#ff9c35", "#ffb364", "#e1e167", "#ffcd98", "#fff298", "#ffffff"]
   },
   {
     "file": "Paint_Brush.png",
     "title": "Paint Brush",
-    "category": "Tools"
+    "category": "Tools",
+    "palette": ["#4a0a0a", "#e62f21", "#855f39", "#ff594c", "#ff7065", "#6ee335", "#ffd02c", "#caa463", "#d72c8c", "#1bcbf4", "#f1c984", "#ffffae", "#ffffff"]
   },
   {
     "file": "Pepper.png",
     "title": "Pepper",
-    "category": "Food"
-  },
-  {
-    "file": "Plant.png",
-    "title": "Plant",
-    "category": "Nature"
-  },
-  {
-    "file": "Poison.png",
-    "title": "Poison",
-    "category": "Items"
-  },
-  {
-    "file": "Poop.png",
-    "title": "Poop",
-    "category": "Fun"
-  },
-  {
-    "file": "Rainbow_Cloud.png",
-    "title": "Rainbow Cloud",
-    "category": "Nature"
-  },
-  {
-    "file": "Rainbow_Poop.png",
-    "title": "Rainbow Poop",
-    "category": "Fun"
-  },
-  {
-    "file": "Red_Ring.png",
-    "title": "Red Ring",
-    "category": "Items"
-  },
-  {
-    "file": "Sand_Clock.png",
-    "title": "Sand Clock",
-    "category": "Objects"
-  },
-  {
-    "file": "Steak.png",
-    "title": "Steak",
-    "category": "Food"
-  },
-  {
-    "file": "Strawberry_Band_Aids.png",
-    "title": "Strawberry Band Aids",
-    "category": "Items"
+    "category": "Food",
+    "palette": ["#62632a", "#8c0202", "#a00404", "#d60c0c", "#c21010", "#ff2f2f", "#ff6f4e", "#9cba0e", "#b7d626", "#ffffff"]
   },
   {
     "file": "Pinwheel.png",
     "title": "Pinwheel",
-    "category": "Objects"
+    "category": "Objects",
+    "palette": ["#5a0016", "#b2002c", "#d11140", "#ffa114", "#ffcb14", "#ffffff"]
+  },
+  {
+    "file": "Plant.png",
+    "title": "Plant",
+    "category": "Nature",
+    "palette": ["#b0683c", "#249f2a", "#49b44e", "#68c45e", "#b98141", "#ce9a49", "#dcac75", "#abe186"]
+  },
+  {
+    "file": "Poison.png",
+    "title": "Poison",
+    "category": "Items",
+    "palette": ["#691f19", "#5a2808", "#632410", "#683720", "#733531", "#7b3d31", "#292d42", "#4a5173", "#52557b", "#9c3d21", "#9c4d10", "#b55919", "#84553a", "#9c5931", "#a54129", "#a54529", "#ad5521", "#b56131", "#b56531", "#8c4d4a", "#946552", "#b57952", "#ce5d4a", "#c58e42", "#d68652", "#de9e73", "#f7ca63", "#5a6184", "#b5c6f7", "#c5ceef", "#def7ff", "#e6f3f7"]
+  },
+  {
+    "file": "Poop.png",
+    "title": "Poop",
+    "category": "Fun",
+    "palette": ["#000000", "#613310", "#fa3939", "#995418", "#bd712d", "#ffffff"]
+  },
+  {
+    "file": "Rainbow_Cloud.png",
+    "title": "Rainbow Cloud",
+    "category": "Nature",
+    "palette": ["#000000", "#ff4477", "#ffb74f", "#ffff5c", "#e17da2", "#ff7da2", "#ad5edd", "#af5fe0", "#1e90cc", "#13e6ec", "#6dfcff", "#ce80ff", "#bce8ff", "#ffffff"]
+  },
+  {
+    "file": "Rainbow_Poop.png",
+    "title": "Rainbow Poop",
+    "category": "Fun",
+    "palette": ["#000000", "#006d11", "#ad5000", "#c95d01", "#03d725", "#ffb317", "#fdf063", "#0068a2", "#bb2b98", "#fe7edf", "#00baff", "#ffffff"]
+  },
+  {
+    "file": "Red_Ring.png",
+    "title": "Red Ring",
+    "category": "Items",
+    "palette": ["#a83b00", "#9a0036", "#ca1554", "#ee0e5d", "#ff357c", "#ecc531", "#fddc5d", "#ff87b0", "#ffffff"]
+  },
+  {
+    "file": "Sand_Clock.png",
+    "title": "Sand Clock",
+    "category": "Objects",
+    "palette": ["#bb2f21", "#e05345", "#ff992f", "#ffd22f", "#ffe68b", "#a5d6f3", "#baf9ff", "#ffffff"]
+  },
+  {
+    "file": "Steak.png",
+    "title": "Steak",
+    "category": "Food",
+    "palette": ["#8a2407", "#a93a1b", "#b04020", "#e36642", "#ff805d"]
+  },
+  {
+    "file": "Strawberry_Band_Aids.png",
+    "title": "Strawberry Band Aids",
+    "category": "Items",
+    "palette": ["#ac5454", "#fe5252", "#528127", "#a0e372", "#f18787", "#ffb6b6", "#ffdede", "#ffffff"]
   },
   {
     "file": "Tree.png",
     "title": "Tree",
-    "category": "Nature"
+    "category": "Nature",
+    "palette": ["#ba6635", "#0b975d", "#6dcf4d", "#da895b", "#a4ec58", "#fffc7c", "#4cca8a", "#5ceda3", "#c6f985", "#ffb8cd"]
   },
   {
     "file": "Wi-Fi.png",
     "title": "Wi-Fi",
-    "category": "UI"
+    "category": "UI",
+    "palette": ["#ff7272", "#ff840d", "#ffa54e", "#ffd944", "#ccff4e", "#fff25b", "#4e5cff", "#4effd4", "#4edeff"]
   }
 ]
