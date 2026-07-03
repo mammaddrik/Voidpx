@@ -2,7 +2,8 @@
   {
     "file": "Alien.png",
     "title": "Alien",
-    "category": "Characters"
+    "category": "Characters",
+    "palette": ["#8511f3", "#9f11f2", "#e94deb", "#c064f6", "#dd79fe", "#fea7ff", "#ffd7f8", "#ffffff"]
   },
   {
     "file": "Arcade.png",

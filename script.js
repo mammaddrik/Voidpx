@@ -397,6 +397,56 @@ function openPreview(image, index) {
   previewImage.alt = image.title || getImageName(image);
   if (previewTitle) previewTitle.textContent = image.title || getImageName(image);
   if (previewCategory) previewCategory.textContent = image.category || "Uncategorized";
+
+  const metaSection = document.querySelector('.preview-modal__meta');
+  if (metaSection) {
+    const existingPalette = metaSection.querySelector('.modal-palette-container');
+    if (existingPalette) {
+      existingPalette.remove();
+    }
+
+    if (image.palette && Array.isArray(image.palette)) {
+      const paletteDiv = document.createElement('div');
+      paletteDiv.className = 'modal-palette-container';
+
+      image.palette.forEach(color => {
+        const chip = document.createElement('div');
+        chip.className = 'palette-chip';
+        chip.style.backgroundColor = color;
+        chip.setAttribute('title', color);
+        chip.setAttribute('role', 'button');
+        chip.setAttribute('tabindex', '0');
+
+        const copyHandler = () => {
+          navigator.clipboard.writeText(color).then(() => {
+            chip.classList.remove('is-copied');
+            void chip.offsetWidth; 
+            chip.classList.add('is-copied');
+            
+            setTimeout(() => {
+              chip.classList.remove('is-copied');
+            }, 400);
+          }).catch(err => {
+            console.error('Failed to copy color: ', err);
+          });
+        };
+
+        chip.addEventListener('click', copyHandler);
+        chip.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            copyHandler();
+          }
+        });
+
+        paletteDiv.appendChild(chip);
+      });
+
+      metaSection.appendChild(paletteDiv);
+    }
+
+  }
+
   previewModal.classList.add("is-open");
   previewModal.removeAttribute("inert");
   previewModal.setAttribute("aria-hidden", "false");
@@ -614,6 +664,7 @@ fetch("./assets/image/images.json")
       src: `assets/image/${item.file}`,
       title: item.title,
       category: item.category,
+      palette: item.palette || null,
     }));
     const categories = getCategories();
     if (
