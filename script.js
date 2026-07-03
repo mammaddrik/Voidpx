@@ -325,6 +325,32 @@ function createFavoriteButton(imageId) {
   return favBtn;
 }
 
+// ---------- Download Button ----------
+function createDownloadButton(imageSrc, imageName) {
+  const downloadBtn = document.createElement("button");
+  downloadBtn.type = "button";
+  downloadBtn.className = "fav-btn";
+  downloadBtn.setAttribute("aria-label", "Download image");
+
+  const icon = document.createElement("i");
+  icon.className = "bi bi-download";
+  icon.setAttribute("aria-hidden", "true");
+  downloadBtn.appendChild(icon);
+
+  downloadBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const link = document.createElement("a");
+    link.href = imageSrc;
+    link.download = imageName || "pixel-art.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  return downloadBtn;
+}
+
+// ---------- Render ----------
 function createImageCard(image, index) {
   const box = document.createElement("div");
   box.className = "box";
@@ -355,9 +381,17 @@ function createImageCard(image, index) {
   category.textContent =
     image.category || "Uncategorized";
   metaText.append(title, category);
-  const favoriteButton =
-    createFavoriteButton(image.file);
-  meta.append(metaText, favoriteButton);
+
+  const actionsWrapper = document.createElement("div");
+  actionsWrapper.style.display = "flex";
+  actionsWrapper.style.alignItems = "center";
+  actionsWrapper.style.gap = "0.2rem";
+
+  const downloadButton = createDownloadButton(image.src, image.file);
+  const favoriteButton = createFavoriteButton(image.file);
+
+  actionsWrapper.append(downloadButton, favoriteButton);
+  meta.append(metaText, actionsWrapper);
   box.append(imageWrapper, meta);
   return box;
 }
