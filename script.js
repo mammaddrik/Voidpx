@@ -60,6 +60,13 @@ const categoryLabel = categoryToggle?.querySelector("span");
 const favoritesBtn = document.getElementById("favoritesBtn");
 const favoritesIcon = favoritesBtn?.querySelector("i");
 
+const previewModal = document.getElementById("previewModal");
+const previewImage = document.getElementById("previewImage");
+const previewTitle = document.getElementById("previewTitle");
+const previewCategory = document.getElementById("previewCategory");
+const previewClose = document.getElementById("previewClose");
+const previewOverlay = document.querySelector(".preview-modal__overlay");
+
 // ---------- Helpers ----------
 function normalize(text = "") {
   return String(text)
@@ -152,6 +159,8 @@ let lastAppliedQuery = normalize(initialUrlState.query);
 let selectedCategory = initialUrlState.category;
 let resizeTimer;
 let favoritesMode = false;
+let currentPreviewIndex = 0;
+let lastFocusedElement = null;
 
 // ---------- Category ----------
 function getCategories() {
@@ -173,17 +182,13 @@ function updateCategoryButton() {
 // ---------- Favorites Mode ----------
 if (favoritesBtn) {
   favoritesBtn.addEventListener("click", () => {
-
     favoritesMode = !favoritesMode;
-
     favoritesBtn.classList.toggle("is-active", favoritesMode);
-
     if (favoritesIcon) {
       favoritesIcon.className = favoritesMode
         ? "bi bi-heart-fill"
         : "bi bi-heart";
     }
-
     filterImages(getCurrentQuery());
     currentPage = 1;
     refreshGallery();
@@ -255,7 +260,6 @@ function filterImages(query) {
     return normalizedTitle.includes(normalizedQuery);
   });
 }
-
 
 // ---------- Pagination ----------
 function getTotalPages() {
@@ -333,6 +337,10 @@ function createImageCard(image, index) {
   img.loading = "lazy";
   img.decoding = "async";
   imageWrapper.appendChild(img);
+  imageWrapper.addEventListener("click", () => {
+      const absoluteIndex = ((currentPage - 1) * imagesPerPage) + index;
+      openPreview(image, absoluteIndex);
+  });
   const meta = document.createElement("div");
   meta.className = "gallery-card__meta";
   const metaText = document.createElement("div");
@@ -379,6 +387,67 @@ function showPage() {
   gallery.appendChild(fragment);
   updatePagination();
 }
+
+// ---------- Preview Modal ----------
+function openPreview(image, index) {
+  if (!previewModal) return;
+  lastFocusedElement = document.activeElement;
+  currentPreviewIndex = index;
+  previewImage.src = image.src;
+  previewImage.alt = image.title || getImageName(image);
+  if (previewTitle) previewTitle.textContent = image.title || getImageName(image);
+  if (previewCategory) previewCategory.textContent = image.category || "Uncategorized";
+  previewModal.classList.add("is-open");
+  previewModal.removeAttribute("inert");
+  previewModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => {
+    previewClose?.focus();
+  });
+}
+
+function closePreview() {
+  if (!previewModal) return;
+  if (previewModal.contains(document.activeElement)) {
+    document.activeElement.blur();
+  }
+  previewModal.classList.remove("is-open");
+  previewModal.setAttribute("aria-hidden", "true");
+  previewModal.setAttribute("inert", "");
+  document.body.style.overflow = "";
+  if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+    requestAnimationFrame(() => {
+      lastFocusedElement.focus();
+    });
+  }
+}
+if (previewClose) {
+  previewClose.addEventListener("click", closePreview);
+}
+if (previewOverlay) {
+  previewOverlay.addEventListener("click", closePreview);
+}
+function navigatePreview(direction) {
+  const total = currentFilteredImages.length;
+  if (total === 0) return;
+  currentPreviewIndex = (currentPreviewIndex + direction + total) % total;
+  const nextImage = currentFilteredImages[currentPreviewIndex];
+  const targetPage = Math.floor(currentPreviewIndex / imagesPerPage) + 1;
+  if (targetPage !== currentPage) {
+    currentPage = targetPage;
+    syncUrlState();
+    showPage();
+  }
+  openPreview(nextImage, currentPreviewIndex);
+}
+document.getElementById("prevPreview")?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  navigatePreview(-1);
+});
+document.getElementById("nextPreview")?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  navigatePreview(1);
+});
 
 // ---------- Pagination UI ----------
 function updatePagination() {
