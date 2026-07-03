@@ -66,6 +66,8 @@ const previewTitle = document.getElementById("previewTitle");
 const previewCategory = document.getElementById("previewCategory");
 const previewClose = document.getElementById("previewClose");
 const previewOverlay = document.querySelector(".preview-modal__overlay");
+const copyToast = document.getElementById("copyToast");
+let isCopying = false;
 
 // ---------- Helpers ----------
 function normalize(text = "") {
@@ -93,10 +95,7 @@ function getFavorites() {
 }
 
 function saveFavorites(favorites) {
-  localStorage.setItem(
-    "voidpx_favorites",
-    JSON.stringify(favorites)
-  );
+  localStorage.setItem("voidpx_favorites", JSON.stringify(favorites));
 }
 
 function isFavorite(id) {
@@ -175,8 +174,7 @@ function getCategories() {
 
 function updateCategoryButton() {
   if (!categoryLabel) return;
-  categoryLabel.textContent =
-    selectedCategory.toUpperCase();
+  categoryLabel.textContent = selectedCategory.toUpperCase();
 }
 
 // ---------- Favorites Mode ----------
@@ -185,9 +183,7 @@ if (favoritesBtn) {
     favoritesMode = !favoritesMode;
     favoritesBtn.classList.toggle("is-active", favoritesMode);
     if (favoritesIcon) {
-      favoritesIcon.className = favoritesMode
-        ? "bi bi-heart-fill"
-        : "bi bi-heart";
+      favoritesIcon.className = favoritesMode ? "bi bi-heart-fill" : "bi bi-heart";
     }
     filterImages(getCurrentQuery());
     currentPage = 1;
@@ -204,9 +200,7 @@ function calculateImagesPerPage() {
   if (!gallery) return 1;
   const galleryWidth = gallery.clientWidth;
   const galleryHeight = gallery.clientHeight;
-  const isLandscape = window.matchMedia(
-    "(max-height: 480px) and (orientation: landscape)"
-  ).matches;
+  const isLandscape = window.matchMedia("(max-height: 480px) and (orientation: landscape)").matches;
   const minBoxSize = isLandscape ? 140 : 180;
   const styles = window.getComputedStyle(gallery);
   const paddingLeft = getNumberFromCSSValue(styles.paddingLeft);
@@ -215,27 +209,13 @@ function calculateImagesPerPage() {
   const paddingBottom = getNumberFromCSSValue(styles.paddingBottom);
   const columnGap = getNumberFromCSSValue(styles.columnGap);
   const rowGap = getNumberFromCSSValue(styles.rowGap);
-  const usableWidth =
-    galleryWidth - paddingLeft - paddingRight;
-  const usableHeight =
-    galleryHeight - paddingTop - paddingBottom;
+  const usableWidth = galleryWidth - paddingLeft - paddingRight;
+  const usableHeight = galleryHeight - paddingTop - paddingBottom;
   if (usableWidth <= 0 || usableHeight <= 0) {
     return 1;
   }
-  const columns = Math.max(
-    1,
-    Math.floor(
-      (usableWidth + columnGap) /
-        (minBoxSize + columnGap)
-    )
-  );
-  const rows = Math.max(
-    1,
-    Math.floor(
-      (usableHeight + rowGap) /
-        (minBoxSize + rowGap)
-    )
-  );
+  const columns = Math.max(1, Math.floor((usableWidth + columnGap) / (minBoxSize + columnGap)));
+  const rows = Math.max(1, Math.floor((usableHeight + rowGap) / (minBoxSize + rowGap)));
   return Math.max(1, columns * rows);
 }
 
@@ -248,8 +228,7 @@ function filterImages(query) {
       return false;
     }
     const matchesCategory =
-      selectedCategory === "All" ||
-      normalize(image.category) === normalize(selectedCategory);
+      selectedCategory === "All" || normalize(image.category) === normalize(selectedCategory);
     if (!matchesCategory) {
       return false;
     }
@@ -263,12 +242,7 @@ function filterImages(query) {
 
 // ---------- Pagination ----------
 function getTotalPages() {
-  return Math.max(
-    1,
-    Math.ceil(
-      currentFilteredImages.length / imagesPerPage
-    )
-  );
+  return Math.max(1, Math.ceil(currentFilteredImages.length / imagesPerPage));
 }
 
 function getCurrentQuery() {
@@ -299,17 +273,12 @@ function createFavoriteButton(imageId) {
   const favBtn = document.createElement("button");
   favBtn.type = "button";
   favBtn.className = "fav-btn";
-  favBtn.setAttribute(
-    "aria-label",
-    "Add to favorites"
-  );
+  favBtn.setAttribute("aria-label", "Add to favorites");
   if (liked) {
     favBtn.classList.add("is-active");
   }
   const icon = document.createElement("i");
-  icon.className = `bi ${
-    liked ? "bi-heart-fill" : "bi-heart"
-  }`;
+  icon.className = `bi ${liked ? "bi-heart-fill" : "bi-heart"}`;
   icon.setAttribute("aria-hidden", "true");
   favBtn.appendChild(icon);
   favBtn.addEventListener("click", (e) => {
@@ -331,6 +300,7 @@ function createDownloadButton(imageSrc, imageName) {
   downloadBtn.type = "button";
   downloadBtn.className = "fav-btn";
   downloadBtn.setAttribute("aria-label", "Download image");
+  downloadBtn.style.margin = "0";
 
   const icon = document.createElement("i");
   icon.className = "bi bi-download";
@@ -364,8 +334,8 @@ function createImageCard(image, index) {
   img.decoding = "async";
   imageWrapper.appendChild(img);
   imageWrapper.addEventListener("click", () => {
-      const absoluteIndex = ((currentPage - 1) * imagesPerPage) + index;
-      openPreview(image, absoluteIndex);
+    const absoluteIndex = (currentPage - 1) * imagesPerPage + index;
+    openPreview(image, absoluteIndex);
   });
   const meta = document.createElement("div");
   meta.className = "gallery-card__meta";
@@ -373,23 +343,18 @@ function createImageCard(image, index) {
   metaText.className = "gallery-card__meta-text";
   const title = document.createElement("h3");
   title.className = "gallery-card__title";
-  title.textContent =
-    image.title || getImageName(image);
+  title.textContent = image.title || getImageName(image);
   const category = document.createElement("span");
-  category.className =
-    "gallery-card__category";
-  category.textContent =
-    image.category || "Uncategorized";
+  category.className = "gallery-card__category";
+  category.textContent = image.category || "Uncategorized";
   metaText.append(title, category);
-
   const actionsWrapper = document.createElement("div");
   actionsWrapper.style.display = "flex";
   actionsWrapper.style.alignItems = "center";
-  actionsWrapper.style.gap = "0.2rem";
-
+  actionsWrapper.style.gap = "2px";
   const downloadButton = createDownloadButton(image.src, image.file);
   const favoriteButton = createFavoriteButton(image.file);
-
+  favoriteButton.style.margin = "0";
   actionsWrapper.append(downloadButton, favoriteButton);
   meta.append(metaText, actionsWrapper);
   box.append(imageWrapper, meta);
@@ -404,19 +369,11 @@ function showPage() {
     updatePagination();
     return;
   }
-  const startIndex =
-    (currentPage - 1) * imagesPerPage;
-  const pageImages =
-    currentFilteredImages.slice(
-      startIndex,
-      startIndex + imagesPerPage
-    );
-  const fragment =
-    document.createDocumentFragment();
+  const startIndex = (currentPage - 1) * imagesPerPage;
+  const pageImages = currentFilteredImages.slice(startIndex, startIndex + imagesPerPage);
+  const fragment = document.createDocumentFragment();
   pageImages.forEach((image, index) => {
-    fragment.appendChild(
-      createImageCard(image, index)
-    );
+    fragment.appendChild(createImageCard(image, index));
   });
   gallery.appendChild(fragment);
   updatePagination();
@@ -432,42 +389,66 @@ function openPreview(image, index) {
   if (previewTitle) previewTitle.textContent = image.title || getImageName(image);
   if (previewCategory) previewCategory.textContent = image.category || "Uncategorized";
 
-  const metaSection = document.querySelector('.preview-modal__meta');
+  const metaSection = document.querySelector(".preview-modal__meta");
   if (metaSection) {
-    const existingPalette = metaSection.querySelector('.modal-palette-container');
+    const existingPalette = metaSection.querySelector(".modal-palette-container");
     if (existingPalette) {
       existingPalette.remove();
     }
 
     if (image.palette && Array.isArray(image.palette)) {
-      const paletteDiv = document.createElement('div');
-      paletteDiv.className = 'modal-palette-container';
+      const paletteDiv = document.createElement("div");
+      paletteDiv.className = "modal-palette-container";
 
-      image.palette.forEach(color => {
-        const chip = document.createElement('div');
-        chip.className = 'palette-chip';
+      image.palette.forEach((color) => {
+        const chip = document.createElement("div");
+        chip.className = "palette-chip";
         chip.style.backgroundColor = color;
-        chip.setAttribute('title', color);
-        chip.setAttribute('role', 'button');
-        chip.setAttribute('tabindex', '0');
+        chip.setAttribute("title", color);
+        chip.setAttribute("role", "button");
+        chip.setAttribute("tabindex", "0");
 
         const copyHandler = () => {
-          navigator.clipboard.writeText(color).then(() => {
-            chip.classList.remove('is-copied');
-            void chip.offsetWidth; 
-            chip.classList.add('is-copied');
-            
-            setTimeout(() => {
-              chip.classList.remove('is-copied');
-            }, 400);
-          }).catch(err => {
-            console.error('Failed to copy color: ', err);
-          });
+          if (isCopying) return;
+          isCopying = true;
+          document.body.classList.add("is-copying-active");
+
+          navigator.clipboard
+            .writeText(color)
+            .then(() => {
+              if (copyToast) {
+                copyToast.textContent = `Color ${color} copied!`;
+                copyToast.classList.add("show");
+                setTimeout(() => {
+                  copyToast.classList.remove("show");
+                  isCopying = false;
+                  document.body.classList.remove("is-copying-active");
+                }, 2500);
+              }
+
+              chip.classList.remove("is-copied");
+              void chip.offsetWidth;
+              chip.classList.add("is-copied");
+              setTimeout(() => {
+                chip.classList.remove("is-copied");
+              }, 400);
+            })
+            .catch(() => {
+              if (copyToast) {
+                copyToast.textContent = `Failed to copy ${color}`;
+                copyToast.classList.add("show");
+                setTimeout(() => {
+                  copyToast.classList.remove("show");
+                  isCopying = false;
+                  document.body.classList.remove("is-copying-active");
+                }, 2500);
+              }
+            });
         };
 
-        chip.addEventListener('click', copyHandler);
-        chip.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+        chip.addEventListener("click", copyHandler);
+        chip.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             copyHandler();
           }
@@ -478,7 +459,6 @@ function openPreview(image, index) {
 
       metaSection.appendChild(paletteDiv);
     }
-
   }
 
   previewModal.classList.add("is-open");
@@ -505,12 +485,14 @@ function closePreview() {
     });
   }
 }
+
 if (previewClose) {
   previewClose.addEventListener("click", closePreview);
 }
 if (previewOverlay) {
   previewOverlay.addEventListener("click", closePreview);
 }
+
 function navigatePreview(direction) {
   const total = currentFilteredImages.length;
   if (total === 0) return;
@@ -524,10 +506,12 @@ function navigatePreview(direction) {
   }
   openPreview(nextImage, currentPreviewIndex);
 }
+
 document.getElementById("prevPreview")?.addEventListener("click", (e) => {
   e.stopPropagation();
   navigatePreview(-1);
 });
+
 document.getElementById("nextPreview")?.addEventListener("click", (e) => {
   e.stopPropagation();
   navigatePreview(1);
@@ -535,45 +519,31 @@ document.getElementById("nextPreview")?.addEventListener("click", (e) => {
 
 // ---------- Pagination UI ----------
 function updatePagination() {
-  const isEmpty =
-    currentFilteredImages.length === 0;
-  const totalPages = isEmpty
-    ? 1
-    : getTotalPages();
+  const isEmpty = currentFilteredImages.length === 0;
+  const totalPages = isEmpty ? 1 : getTotalPages();
   if (pageNumber) {
-    pageNumber.textContent =
-      `${currentPage} / ${totalPages}`;
+    pageNumber.textContent = `${currentPage} / ${totalPages}`;
   }
   if (prevBtn) {
-    prevBtn.disabled =
-      isEmpty || currentPage <= 1;
+    prevBtn.disabled = isEmpty || currentPage <= 1;
   }
   if (nextBtn) {
-    nextBtn.disabled =
-      isEmpty || currentPage >= totalPages;
+    nextBtn.disabled = isEmpty || currentPage >= totalPages;
   }
   if (imageCount) {
-    const count =
-      currentFilteredImages.length;
-    imageCount.textContent =
-      `${count} image${count === 1 ? "" : "s"}`;
+    const count = currentFilteredImages.length;
+    imageCount.textContent = `${count} image${count === 1 ? "" : "s"}`;
   }
   if (emptyState) {
-    emptyState.classList.toggle(
-      "is-hidden",
-      !isEmpty
-    );
+    emptyState.classList.toggle("is-hidden", !isEmpty);
   }
-  const pagination =
-    document.querySelector(".pagination");
+  const pagination = document.querySelector(".pagination");
   if (pagination) {
-    pagination.classList.toggle(
-      "is-hidden",
-      isEmpty || totalPages <= 1
-    );
+    pagination.classList.toggle("is-hidden", isEmpty || totalPages <= 1);
   }
 }
 
+// ---------- Display ----------
 function refreshGallery() {
   imagesPerPage = calculateImagesPerPage();
   showPage();
@@ -602,8 +572,7 @@ if (nextBtn) {
 function handleSearch() {
   if (!searchInput) return;
   const query = searchInput.value.trim();
-  const normalizedQuery =
-    normalize(query);
+  const normalizedQuery = normalize(query);
   if (normalizedQuery === lastAppliedQuery) {
     return;
   }
@@ -615,80 +584,51 @@ function handleSearch() {
 }
 
 if (searchForm) {
-  searchForm.addEventListener(
-    "submit",
-    (e) => e.preventDefault()
-  );
+  searchForm.addEventListener("submit", (e) => e.preventDefault());
 }
 
 if (searchBtn) {
-  searchBtn.addEventListener(
-    "click",
-    handleSearch
-  );
+  searchBtn.addEventListener("click", handleSearch);
 }
 
 if (searchInput) {
-  searchInput.addEventListener(
-    "keydown",
-    (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-      }
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
     }
-  );
-  searchInput.addEventListener(
-    "input",
-    () => {
-      const normalizedQuery = normalize(
-        searchInput.value.trim()
-      );
-      if (
-        normalizedQuery === "" &&
-        lastAppliedQuery !== ""
-      ) {
-        filterImages("");
-        currentPage = 1;
-        lastAppliedQuery = "";
-        syncUrlState();
-        refreshGallery();
-      }
+  });
+  searchInput.addEventListener("input", () => {
+    const normalizedQuery = normalize(searchInput.value.trim());
+    if (normalizedQuery === "" && lastAppliedQuery !== "") {
+      filterImages("");
+      currentPage = 1;
+      lastAppliedQuery = "";
+      syncUrlState();
+      refreshGallery();
     }
-  );
+  });
 }
 
 // ---------- Category ----------
 if (categoryToggle) {
-  categoryToggle.addEventListener(
-    "click",
-    () => {
-      const categories =
-        getCategories();
-      const currentIndex =
-        categories.indexOf(
-          selectedCategory
-        );
-      const nextIndex =
-        (currentIndex + 1) %
-        categories.length;
-      selectedCategory =
-        categories[nextIndex];
-      updateCategoryButton();
-      filterImages(getCurrentQuery());
-      currentPage = 1;
-      syncUrlState();
-      refreshGallery();
-    }
-  );
+  categoryToggle.addEventListener("click", () => {
+    const categories = getCategories();
+    const currentIndex = categories.indexOf(selectedCategory);
+    const nextIndex = (currentIndex + 1) % categories.length;
+    selectedCategory = categories[nextIndex];
+    updateCategoryButton();
+    filterImages(getCurrentQuery());
+    currentPage = 1;
+    syncUrlState();
+    refreshGallery();
+  });
 }
 
 // ---------- Load Images ----------
 fetch("./assets/image/images.json")
   .then((res) => {
     if (!res.ok) {
-      throw new Error(
-        "Could not load images.json"
-      );
+      throw new Error("Could not load images.json");
     }
     return res.json();
   })
@@ -701,31 +641,19 @@ fetch("./assets/image/images.json")
       palette: item.palette || null,
     }));
     const categories = getCategories();
-    if (
-      !categories.includes(
-        selectedCategory
-      )
-    ) {
+    if (!categories.includes(selectedCategory)) {
       selectedCategory = "All";
     }
     updateCategoryButton();
     if (searchInput) {
-      searchInput.value =
-        initialUrlState.query;
+      searchInput.value = initialUrlState.query;
     }
-    filterImages(
-      initialUrlState.query
-    );
-    lastAppliedQuery = normalize(
-      initialUrlState.query
-    );
+    filterImages(initialUrlState.query);
+    lastAppliedQuery = normalize(initialUrlState.query);
     refreshGallery();
   })
   .catch((err) => {
-    console.error(
-      "Failed to load images.json:",
-      err
-    );
+    console.error("Failed to load images.json:", err);
   });
 
 // ---------- Resize ----------
@@ -733,24 +661,13 @@ window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
     requestAnimationFrame(() => {
-      const newImagesPerPage =
-        calculateImagesPerPage();
-      if (
-        newImagesPerPage ===
-        imagesPerPage
-      ) {
+      const newImagesPerPage = calculateImagesPerPage();
+      if (newImagesPerPage === imagesPerPage) {
         return;
       }
-      const firstVisibleIndex =
-        (currentPage - 1) *
-        imagesPerPage;
-      imagesPerPage =
-        newImagesPerPage;
-      currentPage =
-        Math.floor(
-          firstVisibleIndex /
-            imagesPerPage
-        ) + 1;
+      const firstVisibleIndex = (currentPage - 1) * imagesPerPage;
+      imagesPerPage = newImagesPerPage;
+      currentPage = Math.floor(firstVisibleIndex / imagesPerPage) + 1;
       syncUrlState();
       showPage();
     });

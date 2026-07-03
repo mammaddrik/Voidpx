@@ -46,6 +46,12 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+body.is-copying-active,
+body.is-copying-active * {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+}
+
 a {
   text-decoration: none;
 }
@@ -528,6 +534,15 @@ input:focus {
   justify-content: center;
   cursor: pointer;
   z-index: 10;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.preview-modal__close:focus,
+.preview-modal__close:focus-visible {
+  outline: none;
+  border-radius: 0;
 }
 
 .preview-modal__close i {
@@ -601,6 +616,35 @@ input:focus {
 .palette-chip.is-copied {
   animation: chipCopiedFeedback 0.4s ease-out;
 }
+
+/* ------------------ Toast Notification for Color Copy ------------------ */
+
+.toast-panel {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.copy-toast {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-10px);
+}
+
 
 /* ------------------ Pagination ------------------ */
 
@@ -782,6 +826,14 @@ input:focus {
     text-overflow: unset;
     font-size: 0.75rem;
     line-height: 1.3;
+  }
+
+  .toast-panel {
+    bottom: 20px;
+  }
+  .copy-toast {
+    padding: 10px 15px;
+    font-size: 12px;
   }
 }
 
