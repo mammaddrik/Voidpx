@@ -29,7 +29,7 @@ cd Voidpx
 ```
 Run the project using any local web server.
 
-### Project Structure
+## Project Structure
 ```
 Voidpx/
 |
@@ -47,27 +47,10 @@ Voidpx/
         └── images.json
 ```
 
-### Technologies
-|  **Logo**  |  **Technologies**  |
-| ---------- | ------------------ |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="25"> | HTML5              |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="25"> | CSS3               |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="25"> | Vanilla JavaScript |
-| <img src="https://icons.getbootstrap.com/assets/img/icons-logo.svg" width="25"> | Bootstrap Icons    |
-
-
-
-### Browser Support
-|  **Logo**  |   **Browser**   |
-| ---------- | --------------- |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" width="25"> |  Google Chrome  |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" width="25"> |  Microsoft Edge |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firefox/firefox-original.svg" width="25"> | Mozilla Firefox |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/brave/brave-original.svg" width="25"> | Brave           |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opera/opera-original.svg" width="25"> | Opera           |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/safari/safari-original.svg" width="25"> | Safari          |
-
 ## Screenshots
+<p align="center">
+    <img src="https://i.postimg.cc/nLrC0kBL/Voidpx.png" alt="Voidpx">
+</p>
 
 ## License
 Voidpx is licensed under [MIT License](https://github.com/mammaddrik/Voidpx/blob/main/LICENSE).
