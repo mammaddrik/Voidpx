@@ -1,4 +1,8 @@
 <div id="top"></div>
+<p align="center">
+    <a href="https://github.com/mammaddrik/Voidpx">
+    <img src="https://i.postimg.cc/HkrkDLvH/Voidpx.png" alt="Voidpx logo"></a>
+</p>
 
 # Voidpx
 Voidpx is a clean, lightweight, and responsive pixel art gallery built with HTML, CSS, and Vanilla JavaScript. It provides an intuitive way to browse, search, preview, and download pixel art assets while offering a modern retro-inspired interface. Users can filter artworks by category, save favorites locally, switch between dark and light themes, and copy color palettes with a single click.
