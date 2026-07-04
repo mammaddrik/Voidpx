@@ -59,7 +59,6 @@ const categoryToggle = document.getElementById("categoryToggle");
 const categoryLabel = categoryToggle?.querySelector("span");
 const favoritesBtn = document.getElementById("favoritesBtn");
 const favoritesIcon = favoritesBtn?.querySelector("i");
-
 const previewModal = document.getElementById("previewModal");
 const previewImage = document.getElementById("previewImage");
 const previewTitle = document.getElementById("previewTitle");
@@ -67,7 +66,6 @@ const previewCategory = document.getElementById("previewCategory");
 const previewClose = document.getElementById("previewClose");
 const previewOverlay = document.querySelector(".preview-modal__overlay");
 const copyToast = document.getElementById("copyToast");
-let isCopying = false;
 
 // ---------- Helpers ----------
 function normalize(text = "") {
@@ -160,6 +158,7 @@ let resizeTimer;
 let favoritesMode = false;
 let currentPreviewIndex = 0;
 let lastFocusedElement = null;
+let isCopying = false;
 
 // ---------- Category ----------
 function getCategories() {

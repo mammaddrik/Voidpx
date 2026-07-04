@@ -255,7 +255,6 @@ input:focus {
   transform: scale(1.08);
 }
 
-
 /* ------------------ Gallery Area ------------------ */
 
 .empty-state {
@@ -645,7 +644,6 @@ input:focus {
   transform: translateY(-10px);
 }
 
-
 /* ------------------ Pagination ------------------ */
 
 .pagination {
@@ -831,6 +829,7 @@ input:focus {
   .toast-panel {
     bottom: 20px;
   }
+
   .copy-toast {
     padding: 10px 15px;
     font-size: 12px;
@@ -953,7 +952,7 @@ input:focus {
     gap: 4px;
     margin-top: 6px;
   }
-  
+
   .palette-chip {
     width: 20px;
     height: 20px;
@@ -1096,7 +1095,7 @@ input:focus {
     min-height: 50px;
     gap: 0.8rem;
   }
-  
+
   .fav-btn {
     width: 24px;
     height: 24px;
