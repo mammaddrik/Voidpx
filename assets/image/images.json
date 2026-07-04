@@ -43,6 +43,12 @@
     "palette": ["#d15900", "#ff7b09", "#ff7b75", "#ff9537", "#ffc071", "#ff7397", "#73b1ff", "#fffedc", "#defbff"]
   },
   {
+    "file": "Cats_Paw_2.png",
+    "title": "Cat Paw",
+    "category": "Animals",
+    "palette": ["#6a2008", "#b51421", "#f76d73", "#ff9e4a", "#ffd27b", "#ffb2a5", "#ffffff"]
+  },
+  {
     "file": "Chair.png",
     "title": "Chair",
     "category": "Objects",
@@ -53,6 +59,12 @@
     "title": "Cheese",
     "category": "Food",
     "palette": ["#ed8e00", "#ff9e33", "#ffb929", "#ff9d63", "#ffde43", "#ffc650", "#ffcf6c", "#ffc17c", "#ffdb8f", "#fff48f", "#fff9c6"]
+  },
+  {
+    "file": "Cigarette.png",
+    "title": "Cigarette",
+    "category": "Items",
+    "palette": ["#000000", "#e95c07", "#fbf039", "#d9b066", "#d7d7d7", "#ffffff"]
   },
   {
     "file": "Coin.png",
@@ -125,6 +137,12 @@
     "title": "Ice Cream",
     "category": "Food",
     "palette": ["#c42d3a", "#cc7314", "#e5444e", "#ef525c", "#5cb31d", "#dba120", "#f5a134", "#f8b04f", "#e3a963", "#90dc56", "#9ff35f", "#f6c559", "#f6e859", "#8048bf", "#a272d9", "#379ec2", "#5abbdc", "#7ad1f0", "#fddcb4", "#bc94df", "#ffffff"]
+  },
+  {
+    "file": "Knife.png",
+    "title": "Knife",
+    "category": "Objects",
+    "palette": ["#191919", "#8d0103", "#a3a3a3", "#ffffff"]
   },
   {
     "file": "Koala.png",
