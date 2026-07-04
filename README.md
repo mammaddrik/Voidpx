@@ -21,6 +21,10 @@ Voidpx is a clean, lightweight, and responsive pixel art gallery built with HTML
 - 📄 Responsive pagination
 - 🔗 Shareable URL state (page, search, category)
 
+## Live Demo
+You can explore the project directly in your browser here:
+[**View Voidpx Live**](https://mammaddrik.github.io/Voidpx/)
+
 ## Installation
 Clone the repository and open the project in your browser.<br>
 ```bash
