@@ -199,6 +199,12 @@
     "palette": ["#4a0a0a", "#e62f21", "#855f39", "#ff594c", "#ff7065", "#6ee335", "#ffd02c", "#caa463", "#d72c8c", "#1bcbf4", "#f1c984", "#ffffae", "#ffffff"]
   },
   {
+    "file": "Penguins.png",
+    "title": "Penguins",
+    "category": "Animals",
+    "palette": ["#181f33", "#2e3549", "#bd2029", "#bf222c", "#cf6634", "#ea733d", "#f33f4b", "#ff8a52", "#6b8e94", "#c3cdbb", "#9ebfc3", "#a2bfc2", "#bec5d3", "#ffffff"]
+  },
+  {
     "file": "Pepper.png",
     "title": "Pepper",
     "category": "Food",
