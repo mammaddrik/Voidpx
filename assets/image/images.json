@@ -211,6 +211,12 @@
     "palette": ["#62632a", "#8c0202", "#a00404", "#d60c0c", "#c21010", "#ff2f2f", "#ff6f4e", "#9cba0e", "#b7d626", "#ffffff"]
   },
   {
+    "file": "Pig.png",
+    "title": "pig",
+    "category": "Animals",
+    "palette": ["#521600", "#983710", "#9e3911", "#f3653d", "#efa46d", "#ff9e83", "#ffd0ad", "#ffffff"]
+  },
+  {
     "file": "Pinwheel.png",
     "title": "Pinwheel",
     "category": "Objects",
