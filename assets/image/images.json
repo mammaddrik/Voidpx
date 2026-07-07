@@ -91,6 +91,12 @@
     "palette": ["#4c2d19", "#964e20", "#ffffff"]
   },
   {
+    "file": "Dog_2.png",
+    "title": "Dog",
+    "category": "Animals",
+    "palette": ["##81490b", "#9c5910", "#9b5b14", "#c07d35", "#cf914e", "#f3cca2", "#ffc0c0", "#ffe8cf", "#ffffff"]
+  },
+  {
     "file": "Donut.png",
     "title": "Donut",
     "category": "Food",
@@ -212,7 +218,7 @@
   },
   {
     "file": "Pig.png",
-    "title": "pig",
+    "title": "Pig",
     "category": "Animals",
     "palette": ["#521600", "#983710", "#9e3911", "#f3653d", "#efa46d", "#ff9e83", "#ffd0ad", "#ffffff"]
   },
