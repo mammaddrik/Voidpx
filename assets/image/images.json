@@ -271,6 +271,12 @@
     "palette": ["#bb2f21", "#e05345", "#ff992f", "#ffd22f", "#ffe68b", "#a5d6f3", "#baf9ff", "#ffffff"]
   },
   {
+    "file": "Shark.png",
+    "title": "Shark",
+    "category": "Animals",
+    "palette": ["#1e314e", "#981d29", "#ca3746", "#ff5b6c", "#3a6fc5", "#82abec", "#a3e0f1", "#ffffff"]
+  },
+  {
     "file": "Steak.png",
     "title": "Steak",
     "category": "Food",
