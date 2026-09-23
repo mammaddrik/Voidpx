@@ -103,6 +103,12 @@
     "palette": ["#94004a", "#e6007b", "#ff9a4a", "#e1eb4a", "#e171bd", "#ffbe8c", "#ffdf8c", "#e1aed6", "#e1d2e6"]
   },
   {
+    "file": "Father(priest).png",
+    "title": "Father(priest)",
+    "category": "Characters",
+    "palette": ["#000000", "#464646", "#787878", "#c3373b", "#ac8461", "#fedb99", "#e0d6cc", "#ffffff"]
+  },
+  {
     "file": "Feather.png",
     "title": "Feather",
     "category": "Nature",
