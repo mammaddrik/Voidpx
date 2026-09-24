@@ -104,7 +104,7 @@
   },
   {
     "file": "Father(priest).png",
-    "title": "Father(priest)",
+    "title": "Father (priest)",
     "category": "Characters",
     "palette": ["#000000", "#464646", "#787878", "#c3373b", "#ac8461", "#fedb99", "#e0d6cc", "#ffffff"]
   },
@@ -293,6 +293,12 @@
     "title": "Strawberry Band Aids",
     "category": "Items",
     "palette": ["#ac5454", "#fe5252", "#528127", "#a0e372", "#f18787", "#ffb6b6", "#ffdede", "#ffffff"]
+  },
+  {
+    "file": "TinyShroom.png",
+    "title": "Tiny Shroom",
+    "category": "Characters",
+    "palette": ["#000000", "#c80714", "#e4b05b", "#ffffff"]
   },
   {
     "file": "Tree.png",
