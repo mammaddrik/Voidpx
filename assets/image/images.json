@@ -169,6 +169,12 @@
     "palette": ["#3f0c0d", "#601919", "#344506", "#41560c", "#933121", "#e47842", "#7fa23b", "#ef9258", "#ffb98c", "#fff0e8", "#ffffff"]
   },
   {
+    "file": "Kyle.png",
+    "title": "Kyle",
+    "category": "Characters",
+    "palette": ["#000000", "#067b0c", "#2dd12c", "#f6961b", "#04898f", "#ffc187", "#ffffff"]
+  },
+  {
     "file": "Lightning.png",
     "title": "Lightning",
     "category": "Effects",
