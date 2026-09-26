@@ -157,6 +157,12 @@
     "palette": ["#c42d3a", "#cc7314", "#e5444e", "#ef525c", "#5cb31d", "#dba120", "#f5a134", "#f8b04f", "#e3a963", "#90dc56", "#9ff35f", "#f6c559", "#f6e859", "#8048bf", "#a272d9", "#379ec2", "#5abbdc", "#7ad1f0", "#fddcb4", "#bc94df", "#ffffff"]
   },
   {
+    "file": "Keeny.png",
+    "title": "Keeny",
+    "category": "Characters",
+    "palette": ["#000000", "#944613", "#fd9125", "#ffc084", "#ffffff"]
+  },
+  {
     "file": "Knife.png",
     "title": "Knife",
     "category": "Objects",
