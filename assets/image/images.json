@@ -301,6 +301,12 @@
     "palette": ["#1e314e", "#981d29", "#ca3746", "#ff5b6c", "#3a6fc5", "#82abec", "#a3e0f1", "#ffffff"]
   },
   {
+    "file": "Stan.png",
+    "title": "Stan",
+    "category": "Characters",
+    "palette": ["#000000", "#d81f3d", "#9a6159", "#5662a1", "##fadab3", "#ffffff"]
+  },
+  {
     "file": "Steak.png",
     "title": "Steak",
     "category": "Food",
