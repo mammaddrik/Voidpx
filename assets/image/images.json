@@ -253,6 +253,12 @@
     "palette": ["#5a0016", "#b2002c", "#d11140", "#ffa114", "#ffcb14", "#ffffff"]
   },
   {
+    "file": "Pizza.png",
+    "title": "Pizza",
+    "category": "Food",
+    "palette": ["#000000", "#ff1810", "#ff5d5a", "#ff6963", "#f77d6b", "#a5b23a", "#ffae4a", "#ffdf4a", "#ffd26b", "#f79684", "#ffef9c", "#ffefa5"]
+  },
+  {
     "file": "Plant.png",
     "title": "Plant",
     "category": "Nature",
