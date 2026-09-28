@@ -25,6 +25,12 @@
     "palette": ["#dd7200", "#f1a24d", "#008af1", "#3cc5ff", "#76d6ff", "#fffd8a", "#a8f4ff", "#ffffff"]
   },
   {
+    "file": "Bubble.png",
+    "title": "Bubble",
+    "category": "Effects",
+    "palette": ["#7a7a7a", "#a93d9f", "#7ce9ec", "#fb9df9", "#ffffff"]
+  },
+  {
     "file": "Cactus.png",
     "title": "Cactus",
     "category": "Nature",
