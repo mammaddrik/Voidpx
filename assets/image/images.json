@@ -37,6 +37,12 @@
     "palette": ["#000000", "#692810", "#495c0f", "#b75732", "#a3255a", "#9cbe2e", "#a9b727", "#d7de33", "#eaf23b", "#fe70ac", "#ffb093"]
   },
   {
+    "file": "Car.png",
+    "title": "Car",
+    "category": "Objects",
+    "palette": ["#16020a", "#083a00", "#39242d", "#008c0f", "#31d543", "#ffd931", "#2966a7", "#d6bec5", "#8accff", "#b5ebff", "#ffffff"]
+  },
+  {
     "file": "Cat.png",
     "title": "Cat",
     "category": "Animals",
