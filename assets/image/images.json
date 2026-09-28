@@ -103,6 +103,12 @@
     "palette": ["#94004a", "#e6007b", "#ff9a4a", "#e1eb4a", "#e171bd", "#ffbe8c", "#ffdf8c", "#e1aed6", "#e1d2e6"]
   },
   {
+    "file": "Egg.png",
+    "title": "Egg",
+    "category": "Food",
+    "palette": ["#6b3d52", "#f18d4a", "#f0b54f", "#f7d252", "#cec2c5", "#ffe7c5", "#ffffff"]
+  },
+  {
     "file": "Father(priest).png",
     "title": "Father (priest)",
     "category": "Characters",
