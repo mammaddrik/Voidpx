@@ -199,6 +199,12 @@
     "palette": ["#000000", "#067b0c", "#2dd12c", "#f6961b", "#04898f", "#ffc187", "#ffffff"]
   },
   {
+    "file": "Lighthouse.png",
+    "title": "Lighthouse",
+    "category": "Objects",
+    "palette": ["#5b1913", "#38424e", "#3d4f65", "#3e627a", "#54606f", "#ae2418", "#c62315", "#d23022", "#de3e30", "#f4d415", "#f5dd49", "#fdec7e", "#718298", "#698da5", "#d4abab", "#fdf5b2", "#8ea4c1", "#b4c9e4", "#ead5d5", "#ffffe6", "#ffffff"]
+  },
+  {
     "file": "Lightning.png",
     "title": "Lightning",
     "category": "Effects",
