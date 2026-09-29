@@ -325,6 +325,12 @@
     "palette": ["#bb2f21", "#e05345", "#ff992f", "#ffd22f", "#ffe68b", "#a5d6f3", "#baf9ff", "#ffffff"]
   },
   {
+    "file": "SantaClaus.png",
+    "title": "Santa Claus",
+    "category": "Characters",
+    "palette": ["#ff3131", "#a55d08", "#e69e42", "#29418c", "#6bc2de", "#85f3ff", "#ffffff"]
+  },
+  {
     "file": "Shark.png",
     "title": "Shark",
     "category": "Animals",
