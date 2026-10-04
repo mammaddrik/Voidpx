@@ -37,6 +37,12 @@
     "palette": ["#000000", "#692810", "#495c0f", "#b75732", "#a3255a", "#9cbe2e", "#a9b727", "#d7de33", "#eaf23b", "#fe70ac", "#ffb093"]
   },
   {
+    "file": "Candy.png",
+    "title": "Candy",
+    "category": "Food",
+    "palette": ["#ff547d", "#ff7079", "#ffb21c", "#ffc066", "#e0f97a", "#fd959c", "#fdb3b1", "#df91ff", "#88eaf8", "#c6f5fb", "#ffedef", "#ffffff"]
+  },
+  {
     "file": "Car.png",
     "title": "Car",
     "category": "Objects",
