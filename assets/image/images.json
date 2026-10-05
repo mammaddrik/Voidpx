@@ -205,6 +205,12 @@
     "palette": ["#000000", "#067b0c", "#2dd12c", "#f6961b", "#04898f", "#ffc187", "#ffffff"]
   },
   {
+    "file": "Lighter.png",
+    "title": "Lighter",
+    "category": "Tools",
+    "palette": ["#1b1f22", "#412050", "#5c486b", "#fa6a0a", "#f9a31a", "#fcd741", "#887d8d", "#b8b4b1", "#fffee0"]
+  },
+  {
     "file": "Lighthouse.png",
     "title": "Lighthouse",
     "category": "Objects",
