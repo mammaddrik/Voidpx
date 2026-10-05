@@ -103,6 +103,12 @@
     "palette": ["#652800", "#ce240e", "#e12205", "#ff2205", "#894416", "#c06200", "#db7915", "#e79000", "#ffb130", "#ffc830", "#ffd841", "#ffa69a", "#ffffff"]
   },
   {
+    "file": "Cup.png",
+    "title": "Cup",
+    "category": "Items",
+    "palette": ["#000000", "#80513f", "#deb43c", "#ffffff"]
+  },
+  {
     "file": "Dog.png",
     "title": "Dog",
     "category": "Animals",
