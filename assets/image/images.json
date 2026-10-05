@@ -395,5 +395,11 @@
     "title": "Wi-Fi",
     "category": "UI",
     "palette": ["#ff7272", "#ff840d", "#ffa54e", "#ffd944", "#ccff4e", "#fff25b", "#4e5cff", "#4effd4", "#4edeff"]
+  },
+  {
+    "file": "Zombie.png",
+    "title": "Zombie",
+    "category": "Characters",
+    "palette": ["#000000", "#224518", "#0c2161", "#12297d", "#065c73", "#5e5a5e", "#588c2a", "#72ab41", "#2439ae", "#0eb5ce"]
   }
 ]
