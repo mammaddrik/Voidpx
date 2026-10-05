@@ -331,6 +331,12 @@
     "palette": ["#a83b00", "#9a0036", "#ca1554", "#ee0e5d", "#ff357c", "#ecc531", "#fddc5d", "#ff87b0", "#ffffff"]
   },
   {
+    "file": "Rotisserie_Chicken.png",
+    "title": "Rotisserie Chicken",
+    "category": "Food",
+    "palette": ["#a40000", "#d41313", "#e02e2e", "#b14100", "#f77900","#f27e3b", "#5ba507", "#79c522", "#ff9615", "#ffb51d", "#fc8e24", "#fed01d",  "#a9dc70", "#9dbabe", "#c4d1d3", "#d2e0e2", "#e1f2f5", "#ffffff"]
+  },
+  {
     "file": "Sand_Clock.png",
     "title": "Sand Clock",
     "category": "Objects",
