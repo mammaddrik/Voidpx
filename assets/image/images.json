@@ -157,6 +157,12 @@
     "palette": ["#ef621d", "#ed4537", "#f5884d", "#ffe35c", "#fffb5c"]
   },
   {
+    "file": "Flag.png",
+    "title": "Flag",
+    "category": "Items",
+    "palette": ["#000000", "#e10000", "#fd0000", "#cfe2f3"]
+  },
+  {
     "file": "Flower.png",
     "title": "Flower",
     "category": "Nature",
