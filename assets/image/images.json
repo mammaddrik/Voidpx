@@ -133,6 +133,12 @@
     "palette": ["#6b3d52", "#f18d4a", "#f0b54f", "#f7d252", "#cec2c5", "#ffe7c5", "#ffffff"]
   },
   {
+    "file": "Eric.png",
+    "title": "Eric",
+    "category": "Characters",
+    "palette": ["#000000", "#854d36", "#ea3452", "#ffdc21", "#00bdbe", "#f1dcae", "#ffffff"]
+  },
+  {
     "file": "Father(priest).png",
     "title": "Father (priest)",
     "category": "Characters",
