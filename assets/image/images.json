@@ -343,6 +343,12 @@
     "palette": ["#a83b00", "#9a0036", "#ca1554", "#ee0e5d", "#ff357c", "#ecc531", "#fddc5d", "#ff87b0", "#ffffff"]
   },
   {
+    "file": "Rose.png",
+    "title": "Rose",
+    "category": "Nature",
+    "palette": ["#000000", "#3d7023", "#a9231a", "#d2332d", "#eb4537", "#519037"]
+  },
+  {
     "file": "Rotisserie_Chicken.png",
     "title": "Rotisserie Chicken",
     "category": "Food",
