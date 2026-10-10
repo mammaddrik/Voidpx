@@ -187,6 +187,12 @@
     "palette": ["#000000", "#595652", "#ffffff"]
   },
   {
+    "file": "Hat.png",
+    "title": "Hat",
+    "category": "Objects",
+    "palette": ["#32001d", "#2c3f19", "#3a5424", "#507833", "#d40c55", "#f221db", "#e987cd", "#ffccfb"]
+  },
+  {
     "file": "Health_Bar.png",
     "title": "Health Bar",
     "category": "UI",
