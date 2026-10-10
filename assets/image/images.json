@@ -55,6 +55,12 @@
     "palette": ["#000000", "#fa8618", "#feaa5a"]
   },
   {
+    "file": "Cat_2.png",
+    "title": "Cat",
+    "category": "Animals",
+    "palette": ["#000000", "#d39a15", "#828282", "#f1bd8e", "#c0babc", "#fcec97", "#c5c3c4", "#fee1dd", "#ffffff"]
+  },
+  {
     "file": "Cats_Paw.png",
     "title": "Cat Paw",
     "category": "Animals",
