@@ -16,7 +16,12 @@
     "title": "Band Aids",
     "category": "Items",
     "palette": ["#b67100", "#f9b56a", "#ffc78b", "#ffd2a1", "#f6edc7", "#fffeec"]
-
+  },
+  {
+    "file": "Biscuit.png",
+    "title": "Biscuit",
+    "category": "Food",
+    "palette": ["#6a3925", "#a9610c", "#884a31", "#b67120", "#f7a93f", "#ffbe65", "#ffd397"]
   },
   {
     "file": "Blue_Ring.png",
