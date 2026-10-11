@@ -354,6 +354,12 @@
     "palette": ["#000000", "#613310", "#fa3939", "#995418", "#bd712d", "#ffffff"]
   },
   {
+    "file": "Rabbit.png",
+    "title": "Rabbit",
+    "category": "Animals",
+    "palette": ["#521400", "#6d3a04", "#0b0b74", "#37d137", "#c8853c", "#ffeb76", "#ffb3d4", "#d7cbe3", "#ffffff"]
+  },
+  {
     "file": "Rainbow_Cloud.png",
     "title": "Rainbow Cloud",
     "category": "Nature",
