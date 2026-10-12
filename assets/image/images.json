@@ -246,6 +246,12 @@
     "palette": ["#3f0c0d", "#601919", "#344506", "#41560c", "#933121", "#e47842", "#7fa23b", "#ef9258", "#ffb98c", "#fff0e8", "#ffffff"]
   },
   {
+    "file": "Koala_2.png",
+    "title": "Koala",
+    "category": "Animals",
+    "palette": ["#402c7e", "#9386ba", "#bab2d1", "#ff98c3", "#dcd5ee", "#ffffff"]
+  },
+  {
     "file": "Kyle.png",
     "title": "Kyle",
     "category": "Characters",
