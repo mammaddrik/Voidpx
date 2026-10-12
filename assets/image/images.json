@@ -270,6 +270,12 @@
     "palette": ["#28123b", "#ffc34e", "#7bf9ff", "#a0fbb6", "#ffee89", "#a5a9ff", "#fb98f1", "#ffb1fd", "#87d2ff", "#ffffff"]
   },
   {
+    "file": "Money_Bag.png",
+    "title": "Money Bag",
+    "category": "Items",
+    "palette": ["#000000", "#42724d", "#1ab968", "#2dc477", "#3fcb77", "#59ce88", "#68e198"]
+  },
+  {
     "file": "Moon_Ball.png",
     "title": "Moon Ball",
     "category": "Items",
