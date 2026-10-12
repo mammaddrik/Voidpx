@@ -378,6 +378,12 @@
     "palette": ["#a83b00", "#9a0036", "#ca1554", "#ee0e5d", "#ff357c", "#ecc531", "#fddc5d", "#ff87b0", "#ffffff"]
   },
   {
+    "file": "Rick_&_Morty.png",
+    "title": "Rick & Morty",
+    "category": "Characters",
+    "palette": ["#000000", "#533733", "#7d5b20", "#f0aa0c", "#ecd700", "#0a2995", "#58c9d6", "#e3b68f", "#ffffff"]
+  },
+  {
     "file": "Rose.png",
     "title": "Rose",
     "category": "Nature",
