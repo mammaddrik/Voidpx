@@ -96,6 +96,12 @@
     "palette": ["#000000", "#e95c07", "#fbf039", "#d9b066", "#d7d7d7", "#ffffff"]
   },
   {
+    "file": "Clothing.png",
+    "title": "Clothing",
+    "category": "Objects",
+    "palette": ["#0f1f3b", "#4e0e24", "#d54172", "#336087", "#f56091", "#56adbb", "#d0a8b6", "#ffffff"]
+  },
+  {
     "file": "Coin.png",
     "title": "Coin",
     "category": "Items",
