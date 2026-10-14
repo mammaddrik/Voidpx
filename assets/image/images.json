@@ -258,6 +258,12 @@
     "palette": ["#000000", "#067b0c", "#2dd12c", "#f6961b", "#04898f", "#ffc187", "#ffffff"]
   },
   {
+    "file": "Lemonade.png",
+    "title": "Lemonade",
+    "category": "Food",
+    "palette": ["#000000", "#fe4330", "#ffbb27", "#fdd943", "#d1f1fc"]
+  },
+  {
     "file": "Lighter.png",
     "title": "Lighter",
     "category": "Tools",
