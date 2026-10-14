@@ -306,6 +306,12 @@
     "palette": ["#2a1200", "#711e1e", "#542501", "#6c360d", "#8e260a", "#a32909", "#b43310", "#d2380f", "#985b2d", "#cd5800", "#da4c26", "#ff913f", "#ffa086", "#b9d6d8", "#e4feff", "#ffffff"]
   },
   {
+    "file": "Noodles.png",
+    "title": "Noodles",
+    "category": "Food",
+    "palette": ["#871f2e", "#d83133", "#9a4300", "#e94746", "#e17851", "#ee9a40", "#fdd453", "#639bff", "#f4e0d8", "#ffffff"]
+  },
+  {
     "file": "Octopus.png",
     "title": "Octopus",
     "category": "Animals",
