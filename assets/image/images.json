@@ -30,6 +30,12 @@
     "palette": ["#dd7200", "#f1a24d", "#008af1", "#3cc5ff", "#76d6ff", "#fffd8a", "#a8f4ff", "#ffffff"]
   },
   {
+    "file": "Blue_Ring_2.png",
+    "title": "Blue Ring",
+    "category": "Items",
+    "palette": ["#ffba3e", "#ffdf00", "#ffea57", "#1bdeff", "#fff788", "#86f4ff", "#d0fbff", "#ffffff"]
+  },
+  {
     "file": "Bubble.png",
     "title": "Bubble",
     "category": "Effects",
