@@ -234,6 +234,12 @@
     "palette": ["#000000", "#6499a9", "#ffffff"]
   },
   {
+    "file": "HollowKnight_Hornet.png",
+    "title": "Hornet",
+    "category": "Characters",
+    "palette": ["#000000", "#b92828", "#ffffff"]
+  },
+  {
     "file": "Ice_Cream.png",
     "title": "Ice Cream",
     "category": "Food",
