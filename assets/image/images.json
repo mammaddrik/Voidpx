@@ -450,6 +450,12 @@
     "palette": ["#bb2f21", "#e05345", "#ff992f", "#ffd22f", "#ffe68b", "#a5d6f3", "#baf9ff", "#ffffff"]
   },
   {
+    "file": "Sans.png",
+    "title": "Sans",
+    "category": "Characters",
+    "palette": ["#000000", "#016cce", "#9ab9ff", "#ffffff"]
+  },
+  {
     "file": "SantaClaus.png",
     "title": "Santa Claus",
     "category": "Characters",
