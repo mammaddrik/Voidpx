@@ -36,6 +36,12 @@
     "palette": ["#ffba3e", "#ffdf00", "#ffea57", "#1bdeff", "#fff788", "#86f4ff", "#d0fbff", "#ffffff"]
   },
   {
+    "file": "Brian_Griffin.png",
+    "title": "Brian Griffin",
+    "category": "Characters",
+    "palette": ["#000000", "#e1363a", "#66c141", "#fbf236", "#9fe07b", "#f5f2b7", "#d9d9d9", "#ffffff"]
+  },
+  {
     "file": "Bubble.png",
     "title": "Bubble",
     "category": "Effects",
