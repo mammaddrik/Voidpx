@@ -342,6 +342,12 @@
     "palette": ["#871f2e", "#d83133", "#9a4300", "#e94746", "#e17851", "#ee9a40", "#fdd453", "#639bff", "#f4e0d8", "#ffffff"]
   },
   {
+    "file": "Nyan_Cat.png",
+    "title": "Nyan Cat",
+    "category": "Fun",
+    "palette": ["#000000", "#616161", "#fa0104", "#ff6a03", "#04ff24", "#fed807", "#ffeb7b", "#7538b0", "#aa51fe", "#0291fb", "#ff8bbf", "#ffffff"]
+  },
+  {
     "file": "Octopus.png",
     "title": "Octopus",
     "category": "Animals",
