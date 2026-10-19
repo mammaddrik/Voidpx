@@ -486,6 +486,12 @@
     "palette": ["#000000", "#fd0501", "#006dbe", "#fabf8f", "#ffffff"]
   },
   {
+    "file": "Squidward.png",
+    "title": "Squidward",
+    "category": "Characters",
+    "palette": ["#000000", "#842a2c", "#b2d0c6", "#f9f7c6"]
+  },
+  {
     "file": "Stan.png",
     "title": "Stan",
     "category": "Characters",
