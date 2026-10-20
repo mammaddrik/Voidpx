@@ -366,6 +366,12 @@
     "palette": ["#4a0a0a", "#e62f21", "#855f39", "#ff594c", "#ff7065", "#6ee335", "#ffd02c", "#caa463", "#d72c8c", "#1bcbf4", "#f1c984", "#ffffae", "#ffffff"]
   },
   {
+    "file": "Patrick_Star.png",
+    "title": "Patrick",
+    "category": "Characters",
+    "palette": ["#000000", "#926c65", "#65dd6c", "#9318d4", "#8e8e8e", "#ec9eb8", "#ffffff"]
+  },
+  {
     "file": "Penguins.png",
     "title": "Penguins",
     "category": "Animals",
