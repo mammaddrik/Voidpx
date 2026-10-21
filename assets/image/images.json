@@ -492,6 +492,12 @@
     "palette": ["#000000", "#fd0501", "#006dbe", "#fabf8f", "#ffffff"]
   },
   {
+    "file": "SpongeBob.png",
+    "title": "SpongeBob",
+    "category": "Characters",
+    "palette": ["#000000", "#7d3619", "#84342b", "#9e3031", "#fd0002", "#bc6a3e", "#bc704c", "#adab35", "#fdf001", "#959b69", "#3eb8f1", "#9badb7", "#f39e99", "#ffffff"]
+  },
+  {
     "file": "Squidward.png",
     "title": "Squidward",
     "category": "Characters",
