@@ -216,6 +216,12 @@
     "palette": ["#065b00", "#098600", "#8cbe30"]
   },
   {
+    "file": "Frisk.png",
+    "title": "Frisk",
+    "category": "Characters",
+    "palette": ["#000000", "#3d1a00", "#fed700", "#f200ea", "#419efe"]
+  },
+  {
     "file": "Ghost.png",
     "title": "Ghost",
     "category": "Characters",
