@@ -540,6 +540,12 @@
     "palette": ["#ba6635", "#0b975d", "#6dcf4d", "#da895b", "#a4ec58", "#fffc7c", "#4cca8a", "#5ceda3", "#c6f985", "#ffb8cd"]
   },
   {
+    "file": "Wendy.png",
+    "title": "Wendy",
+    "category": "Characters",
+    "palette": ["#000000", "#f7e917", "#6f37e2", "#9048bd", "#ff11c4", "#edcbaf", "#ffffff"]
+  },
+  {
     "file": "Wi-Fi.png",
     "title": "Wi-Fi",
     "category": "UI",
