@@ -312,6 +312,12 @@
     "palette": ["#000000", "#ffdd00"]
   },
   {
+    "file": "Mabel_Pines.png",
+    "title": "Mabel Pines",
+    "category": "Characters",
+    "palette": ["#000000", "#8d5524", "#e91e63", "#00bcd4", "#ffe0bd", "#ffffff"]
+  },
+  {
     "file": "Magic_Ball.png",
     "title": "Magic Ball",
     "category": "Items",
