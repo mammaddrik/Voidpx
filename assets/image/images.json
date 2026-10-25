@@ -144,6 +144,12 @@
     "palette": ["#000000", "#80513f", "#deb43c", "#ffffff"]
   },
   {
+    "file": "Dipper_Pines.png",
+    "title": "Dipper Pines",
+    "category": "Characters",
+    "palette": ["#000000", "#82471b", "#ff5e27", "#064280", "#0896d4", "#f79f93", "#fed2ad", "#ffffff"]
+  },
+  {
     "file": "Dog.png",
     "title": "Dog",
     "category": "Animals",
@@ -240,16 +246,16 @@
     "palette": ["#262b44", "#b51818", "#bf383f", "#df1616", "#bd5b1c", "#af7620", "#f57522", "#e43b44", "#61aa21", "#ae9a24", "#92a925", "#efa431", "#a5f75e", "#d2eb5a", "#fde661", "#25a781", "#61fed0", "#e8dfa7", "#ffffff"]
   },
   {
-    "file": "HollowKnight_TheKnight.png",
-    "title": "The Knight",
-    "category": "Characters",
-    "palette": ["#000000", "#6499a9", "#ffffff"]
-  },
-  {
     "file": "HollowKnight_Hornet.png",
     "title": "Hornet",
     "category": "Characters",
     "palette": ["#000000", "#b92828", "#ffffff"]
+  },
+  {
+    "file": "HollowKnight_TheKnight.png",
+    "title": "The Knight",
+    "category": "Characters",
+    "palette": ["#000000", "#6499a9", "#ffffff"]
   },
   {
     "file": "Ice_Cream.png",
