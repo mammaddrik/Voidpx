@@ -18,6 +18,12 @@
     "palette": ["#b67100", "#f9b56a", "#ffc78b", "#ffd2a1", "#f6edc7", "#fffeec"]
   },
   {
+    "file": "Bill_Cipher.png",
+    "title": "Bill Cipher",
+    "category": "Characters",
+    "palette": ["#000000", "#dab01c", "#f6f754", "#0567ec", "#0cacf4", "#37edde", "#ffffff"]
+  },
+  {
     "file": "Biscuit.png",
     "title": "Biscuit",
     "category": "Food",
