@@ -516,6 +516,12 @@
     "palette": ["#000000", "#fd0501", "#006dbe", "#fabf8f", "#ffffff"]
   },
   {
+    "file": "Soos.png",
+    "title": "Soos",
+    "category": "Characters",
+    "palette": ["#000000", "#004e40", "#ae0002", "#956303", "#f787a4", "#f5d5a3", "#ffffff"]
+  },
+  {
     "file": "SpongeBob.png",
     "title": "SpongeBob",
     "category": "Characters",
