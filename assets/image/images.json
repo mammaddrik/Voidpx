@@ -576,6 +576,12 @@
     "palette": ["#000000", "#f7e917", "#6f37e2", "#9048bd", "#ff11c4", "#edcbaf", "#ffffff"]
   },
   {
+    "file": "Wendy_Corduroy.png",
+    "title": "Wendy",
+    "category": "Characters",
+    "palette": ["#000000", "#703011", "#d2460c", "#09800a", "#de9353", "#f8b7a5", "#f0cfc0", "#ffffff"]
+  },
+  {
     "file": "Wi-Fi.png",
     "title": "Wi-Fi",
     "category": "UI",
