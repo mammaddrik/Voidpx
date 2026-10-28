@@ -384,6 +384,12 @@
     "palette": ["#c94900", "#e6a800", "#ff9c35", "#ffb364", "#e1e167", "#ffcd98", "#fff298", "#ffffff"]
   },
   {
+    "file": "PacMan.png",
+    "title": "PacMan",
+    "category": "Characters",
+    "palette": ["#000000", "#fbf236"]
+  },
+  {
     "file": "Paint_Brush.png",
     "title": "Paint Brush",
     "category": "Tools",
