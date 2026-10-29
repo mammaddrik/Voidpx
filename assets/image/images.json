@@ -240,6 +240,12 @@
     "palette": ["#000000", "#595652", "#ffffff"]
   },
   {
+    "file": "Ghostface.png",
+    "title": "Ghostface",
+    "category": "Characters",
+    "palette": ["#000000", "#ffffff"]
+  },
+  {
     "file": "Hat.png",
     "title": "Hat",
     "category": "Objects",
