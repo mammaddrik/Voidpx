@@ -612,6 +612,12 @@
     "palette": ["#ff7272", "#ff840d", "#ffa54e", "#ffd944", "#ccff4e", "#fff25b", "#4e5cff", "#4effd4", "#4edeff"]
   },
   {
+    "file": "Witch_Hat.png",
+    "title": "Witch Hat",
+    "category": "UI",
+    "palette": ["#000000", "#d23f04", "#f97007", "#fbdc12", "#441b82", "#742fb4", "#a555cf", "#f7eeb9", "#e488e0"]
+  },
+  {
     "file": "Zombie.png",
     "title": "Zombie",
     "category": "Characters",
