@@ -42,6 +42,12 @@
     "palette": ["#ffba3e", "#ffdf00", "#ffea57", "#1bdeff", "#fff788", "#86f4ff", "#d0fbff", "#ffffff"]
   },
   {
+    "file": "Brand_of_Sacrifice.png",
+    "title": "Brand of Sacrifice",
+    "category": "Effects",
+    "palette": ["#881f1f"]
+  },
+  {
     "file": "Brian_Griffin.png",
     "title": "Brian Griffin",
     "category": "Characters",
