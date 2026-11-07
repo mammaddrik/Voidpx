@@ -258,6 +258,12 @@
     "palette": ["#000000", "#ffffff"]
   },
   {
+    "file": "Guts.png",
+    "title": "Guts",
+    "category": "Characters",
+    "palette": ["#000000", "#43271d", "#474a4e", "#af8457", "#ffc07f", "#acacac", "#ffffff"]
+  },
+  {
     "file": "Hat.png",
     "title": "Hat",
     "category": "Objects",
