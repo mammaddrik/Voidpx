@@ -504,6 +504,12 @@
     "palette": ["#000000", "#006d11", "#ad5000", "#c95d01", "#03d725", "#ffb317", "#fdf063", "#0068a2", "#bb2b98", "#fe7edf", "#00baff", "#ffffff"]
   },
   {
+    "file": "Red_Astronaut.png",
+    "title": "Red Astronaut(Among Us)",
+    "category": "Characters",
+    "palette": ["#000000", "#740a38", "#4a6369", "#bd1704", "#96c8d9", "#ffffff"]
+  },
+  {
     "file": "Red_Ring.png",
     "title": "Red Ring",
     "category": "Items",
@@ -632,7 +638,7 @@
   {
     "file": "Witch_Hat.png",
     "title": "Witch Hat",
-    "category": "UI",
+    "category": "Objects",
     "palette": ["#000000", "#d23f04", "#f97007", "#fbdc12", "#441b82", "#742fb4", "#a555cf", "#f7eeb9", "#e488e0"]
   },
   {
