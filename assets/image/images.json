@@ -468,6 +468,12 @@
     "palette": ["#000000", "#ff1810", "#ff5d5a", "#ff6963", "#f77d6b", "#a5b23a", "#ffae4a", "#ffdf4a", "#ffd26b", "#f79684", "#ffef9c", "#ffefa5"]
   },
   {
+    "file": "Plankton.png",
+    "title": "Plankton",
+    "category": "Characters",
+    "palette": ["#000000", "#237849", "#f44c39", "#e2ec33"]
+  },
+  {
     "file": "Plant.png",
     "title": "Plant",
     "category": "Nature",
