@@ -505,7 +505,7 @@
   },
   {
     "file": "Red_Astronaut.png",
-    "title": "Red Astronaut(Among Us)",
+    "title": "Red Astronaut (Among Us)",
     "category": "Characters",
     "palette": ["#000000", "#740a38", "#4a6369", "#bd1704", "#96c8d9", "#ffffff"]
   },
@@ -640,12 +640,6 @@
     "title": "Witch Hat",
     "category": "Objects",
     "palette": ["#000000", "#d23f04", "#f97007", "#fbdc12", "#441b82", "#742fb4", "#a555cf", "#f7eeb9", "#e488e0"]
-  },
-  {
-    "file": "Zombie.png",
-    "title": "Zombie",
-    "category": "Characters",
-    "palette": ["#000000", "#224518", "#0c2161", "#12297d", "#065c73", "#5e5a5e", "#588c2a", "#72ab41", "#2439ae", "#0eb5ce"]
   },
   {
     "file": "Zombie.png",
