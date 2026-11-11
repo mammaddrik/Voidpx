@@ -450,6 +450,12 @@
     "palette": ["#62632a", "#8c0202", "#a00404", "#d60c0c", "#c21010", "#ff2f2f", "#ff6f4e", "#9cba0e", "#b7d626", "#ffffff"]
   },
   {
+    "file": "Popeye.png",
+    "title": "Popeye",
+    "category": "Characters",
+    "palette": ["#000000", "#fa0315", "#cc8542", "#fddfad", "#ffffff"]
+  },
+  {
     "file": "Pig.png",
     "title": "Pig",
     "category": "Animals",
