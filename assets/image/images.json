@@ -246,6 +246,12 @@
     "palette": ["#065b00", "#098600", "#8cbe30"]
   },
   {
+    "file": "Fox.png",
+    "title": "Fox",
+    "category": "Animals",
+    "palette": ["#000000", "#723715", "#ff6d21", "#ffffff"]
+  },
+  {
     "file": "Frisk.png",
     "title": "Frisk",
     "category": "Characters",
