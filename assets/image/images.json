@@ -18,6 +18,12 @@
     "palette": ["#b67100", "#f9b56a", "#ffc78b", "#ffd2a1", "#f6edc7", "#fffeec"]
   },
   {
+    "file": "Bears.png",
+    "title": "Bears",
+    "category": "Animals",
+    "palette": ["#000000", "#a27f59", "#a78965", "#b39573", "#cab294", "#f8e0bd", "#ffeacf"]
+  },
+  {
     "file": "Bill_Cipher.png",
     "title": "Bill Cipher",
     "category": "Characters",
