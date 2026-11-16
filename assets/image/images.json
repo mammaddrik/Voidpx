@@ -300,6 +300,12 @@
     "palette": ["#262b44", "#b51818", "#bf383f", "#df1616", "#bd5b1c", "#af7620", "#f57522", "#e43b44", "#61aa21", "#ae9a24", "#92a925", "#efa431", "#a5f75e", "#d2eb5a", "#fde661", "#25a781", "#61fed0", "#e8dfa7", "#ffffff"]
   },
   {
+    "file": "Hen.png",
+    "title": "Hen",
+    "category": "Animals",
+    "palette": ["#000000", "#78564a", "#ce3432", "#fdc204", "#b3bfc6", "#ffffff"]
+  },
+  {
     "file": "HollowKnight_Hornet.png",
     "title": "Hornet",
     "category": "Characters",
