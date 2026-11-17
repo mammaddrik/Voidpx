@@ -642,6 +642,12 @@
     "palette": ["#ac5454", "#fe5252", "#528127", "#a0e372", "#f18787", "#ffb6b6", "#ffdede", "#ffffff"]
   },
   {
+    "file": "Sword.png",
+    "title": "Sword",
+    "category": "Tools",
+    "palette": ["#000000", "#6a2b20", "#fd0000", "#fec200", "#9ccbe9", "#c0e2fd", "#ffffff"]
+  },
+  {
     "file": "TinyShroom.png",
     "title": "Tiny Shroom",
     "category": "Characters",
